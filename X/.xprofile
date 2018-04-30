@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export GTK_THEME=Arc-Dark-solid
+export GTK2_RC_FILES=/usr/share/themes/$GTK_THEME/gtk-2.0/gtkrc 
+echo "Setting theme to $GTK_THEME"
+
+if [ -z ${DISPLAY+x} ] ; then 
+	echo "Running on display $DISPLAY"
+else
+	echo "The \$DISPLAY variable is not set"
+fi
+
+syndaemon -i 2 -R -K -d -t
+# xset led named "Num Lock"
+xset r rate 250 30
+# xrdb /home/mikle/.Xresourses
+# /home/mikle/dev/scripts/mpd_watch.sh &
+
