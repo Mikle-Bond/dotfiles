@@ -17,4 +17,5 @@ It resides in the `$HOME/.dotfiles`.
 - [ ] Check how it works on other machines
 - [ ] Write scripts for managing new dotfiles (probably using rsync)
 - [ ] Figure out what to do with system configs
+- [ ] Make `bash` config absolute from other packages
 
