@@ -38,6 +38,8 @@ Plugin 'lyokha/vim-xkbswitch'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'rafaqz/ranger.vim'
+Plugin 'francoiscabrol/ranger.vim'
 
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
@@ -48,6 +50,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mmedvede/w3m.vim'
 Plugin 'dodie/vim-disapprove-deep-indentation'
+Plugin 'fidian/hexmode'
 " Plugin ''
 
 call vundle#end()
@@ -163,4 +166,19 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
+
+
+
+" ranger by rafaqz
+" map <leader>rr :RangerEdit<cr>
+" map <leader>rv :RangerVSplit<cr>
+" map <leader>rs :RangerSplit<cr>
+" map <leader>rt :RangerTab<cr>
+" map <leader>ri :RangerInsert<cr>
+" map <leader>ra :RangerAppend<cr>
+" map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
+
+" ranger by francoiscabol
+let g:NERDTreeHijackNetrw = 0
+let g:ranger_replace_netrw = 1
 
