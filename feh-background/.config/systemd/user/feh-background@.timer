@@ -1,0 +1,10 @@
+[Unit]
+Description=Change walpaper each %I
+
+[Timer]
+OnUnitActiveSec=%i
+Unit=feh-background.service
+
+[Install]
+WantedBy=default.target
+

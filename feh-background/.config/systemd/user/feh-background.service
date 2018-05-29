@@ -1,0 +1,8 @@
+[Unit]
+Description=Feh-based background wallpaper changer
+
+[Service]
+Type=oneshot
+# RemainAfterExit=true
+ExecStart=/bin/bash -c 'exec $HOME/dev/scripts/feh-background.sh'
+

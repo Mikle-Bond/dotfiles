@@ -1,0 +1,9 @@
+[Unit]
+Description=Change walpaper each 2 minutes
+
+[Timer]
+OnUnitActiveSec=2m
+
+[Install]
+WantedBy=default.target
+
