@@ -113,6 +113,13 @@ interval=10
 #instance=1
 interval=30
 
+[keyboard]
+label=XKB
+command=~/dev/scripts/i3block/$BLOCK_NAME
+color=#DD258A
+interval=-3
+#persist
+
 # Date Time
 #
 [time]
