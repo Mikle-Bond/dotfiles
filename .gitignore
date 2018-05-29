@@ -29,3 +29,10 @@ tags
 
 
 # End of https://www.gitignore.io/api/vim,linux
+
+# MPD
+mpd/.config/mpd/pid
+mpd/.config/mpd/state
+mpd/.config/mpd/socket
+mpd/.config/mpd/database
+
