@@ -1,14 +1,15 @@
 #!/bin/bash
 
-export GTK_THEME=Arc-Dark-solid
-export GTK2_RC_FILES=/usr/share/themes/$GTK_THEME/gtk-2.0/gtkrc 
-echo "Setting theme to $GTK_THEME"
+XTHEME="$HOME/.xtheme.sh"
+[ -f "$XTHEME" ] && . $XTHEME
 
 if [ -z ${DISPLAY+x} ] ; then 
 	echo "Running on display $DISPLAY"
 else
 	echo "The \$DISPLAY variable is not set"
 fi
+
+systemctl --user start feh-background@5m.timer
 
 syndaemon -i 2 -R -K -d -t
 # xset led named "Num Lock"
