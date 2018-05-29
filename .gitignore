@@ -36,3 +36,7 @@ mpd/.config/mpd/state
 mpd/.config/mpd/socket
 mpd/.config/mpd/database
 
+# GPG
+gpg-agent/.gnupg/*
+! gpg-agent/.gnupg/gpg-agent.conf
+

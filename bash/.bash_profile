@@ -19,6 +19,12 @@ export PATH
 # Ranger suggested to set it
 export RANGER_LOAD_DEFAULT=FALSE
 
+# Set ssh-agent-related variables to use gpg-agent (picked from ArchWiki)
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ] ; then
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
 # DAMN, IT SHOULDN'T BE HERE
 [ -f $HOME/.bashrc ] && source $HOME/.bashrc
 

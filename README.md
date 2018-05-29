@@ -11,6 +11,7 @@ It resides in the `$HOME/.dotfiles`.
 - YouCompleteMe
 - i3wm (purely trough .xinitrc)
 - compton
+- pass
 
 ##### TODOs
 
