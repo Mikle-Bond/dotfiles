@@ -34,17 +34,19 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'lyokha/vim-xkbswitch'
 " Plugin 'vim-xkbswitch'
 
+" ================== Navigation ===================
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
 Plugin 'majutsushi/tagbar'
 " Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mmedvede/w3m.vim'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dodie/vim-disapprove-deep-indentation'
 " Plugin ''
 
