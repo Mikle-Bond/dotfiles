@@ -10,6 +10,7 @@ It resides in the `$HOME/.dotfiles`.
 - vim + Vundle + Airline
 - YouCompleteMe
 - i3wm (purely trough .xinitrc)
+- compton
 
 ##### TODOs
 
@@ -18,4 +19,5 @@ It resides in the `$HOME/.dotfiles`.
 - [ ] Write scripts for managing new dotfiles (probably using rsync)
 - [ ] Figure out what to do with system configs
 - [ ] Make `bash` config absolute from other packages
+- [ ] Clean up `compton*` configs.
 
