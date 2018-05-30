@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 2
+
 xkb-switch 2>&1
 
 while : ; do
