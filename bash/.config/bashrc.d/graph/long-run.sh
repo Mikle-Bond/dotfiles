@@ -31,8 +31,11 @@ function timer_stop {
 	else timer_show=${us}us
 	fi
 	unset timer
-	if ((s > 10))
-		then notify-send "Process done" "Execuded '$cmd' for $timer_show" 
+	if ((s > 10)) ; then 
+		case "$cmd" in 
+			vim*|man*|ranger*) : ;;
+			*) notify-send "Process done" "Execuded '$cmd' for $timer_show" ;;
+		esac
 	fi
 }
 
