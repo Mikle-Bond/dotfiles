@@ -23,29 +23,9 @@ URxvt*pointerBlank: true
 URxvt*fading: 20
 URxvt*fadeColor: #1e1e1e 
 
-
 ! Colors
-URxvt*cursorColor: #a7a7a7
-URxvt*background: #1e1e1e
-URxvt*foreground: #a7a7a7
-
-! More colors
-URxvt*color0: #1e1e1e
-URxvt*color1: #cf6a4c
-URxvt*color2: #8f9d6a
-URxvt*color3: #f9ee98
-URxvt*color4: #7587a6
-URxvt*color5: #9b859d
-URxvt*color6: #afc4db
-URxvt*color7: #a7a7a7
-URxvt*color8: #5f5a60
-URxvt*color9: #cf6a4c
-URxvt*color10: #8f9d6a
-URxvt*color11: #f9ee98
-URxvt*color12: #7587a6
-URxvt*color13: #9b859d
-URxvt*color14: #afc4db
-URxvt*color15: #ffffff
+#include ".Xresources.d/monokai"
+!include ".Xresources.d/default-colors"
 
 ! 
 ! 
