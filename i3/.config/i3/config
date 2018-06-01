@@ -256,7 +256,9 @@ assign [class="URxvt" instance="Log screen"] workspace 9
 assign [class="tixati"] workspace 8
 # Firefox setup
 assign [class=(Fire|Water)fox] workspace 2
+assign [class=Chromium] workspace 2
 for_window [class=(Fire|Water)fox] border none
+for_window [class=Chromium] border none
 
 # terminal emulator in scratchpad
 for_window [instance="urxvtq" class="URxvt"] floating enable, border pixel 9, sticky enable, move scratchpad 
