@@ -29,6 +29,7 @@ fi
 
 xset -dpms s off -b
 xsetroot -solid "#1e1e1e"
+( feh --bg-scale --no-fehbg "$(< "${HOME}/.cache/wal/wal")" )&
 
 ulimit -c unlimited
 

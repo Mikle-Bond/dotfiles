@@ -1,6 +1,7 @@
 # Set GTK+ theme
-export GTK_THEME=Arc-Dark-solid
-export GTK2_RC_FILES=/usr/share/themes/$GTK_THEME/gtk-2.0/gtkrc 
+# export GTK_THEME=Arc-Dark-solid
+export GTK_THEME=wal
+export GTK2_RC_FILES="$HOME/.themes/$GTK_THEME/gtk-2.0/gtkrc"
 # Set Qt5 theme
 export QT_QPA_PLATFORMTHEME=gtk2
 export QT_STYLE_OVERRIDE=gtk2

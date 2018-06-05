@@ -1,8 +1,11 @@
+URxvt*letterSpace: -1
 
-URxvt*letterSpace: -1 
-
-! URxvt*font: xft:Dejavu\ Sans\ Mono:pixelsize=13,xft:Droid\ Sans\ Mono\ for\ Powerline:pixelsize=13
-URxvt*font: xft:Droid\ Sans\ Mono:pixelsize=13,xft:PowerlineSymbols:pixelsize=13
+URxvt*font:	xft:Droid Sans Mono for Powerline:pixelsize=13,\
+		xft:Noto Color Emoji:minspace=False,
+		xft:Unifont,\
+		9x15
+! URxvt*font: xft:Droid Sans Mono for Powerline:pixelsize=13,xft:Symbola,xft:Noto Color Emoji:minspace=False
+! URxvt*font: xft:Droid\ Sans\ Mono:pixelsize=13,xft:PowerlineSymbols:pixelsize=13
 
 ! Interface
 URxvt*mouseWheelScrollPage: true
@@ -24,7 +27,8 @@ URxvt*fading: 20
 URxvt*fadeColor: #1e1e1e 
 
 ! Colors
-#include ".Xresources.d/monokai"
+#include ".cache/wal/colors.Xresources"
+!include ".Xresources.d/monokai"
 !include ".Xresources.d/default-colors"
 
 ! 
