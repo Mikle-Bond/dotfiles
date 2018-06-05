@@ -1,113 +1,37 @@
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
+# Main modifier
+set $mod Mod4
+
+# Vi-lile movement
+set $up k
+set $down j
+set $left h
+set $right l
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up k
-set $down j
-set $left h
-set $right l
-set $mod Mod4
-
-# use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec urxvtc
-# i3-sensible-terminal
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -z" 
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -z"
-bindsym $mod+Shift+p exec --no-startup-id "passmenu"
-# --term="urxvtc "
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#################################################
+# COPY_PASTE_SETTINGS
+#################################################
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+bindsym $mod+$left 	focus left
+bindsym $mod+$down 	focus down
+bindsym $mod+$up 	focus up
+bindsym $mod+$right 	focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left 	focus left
+bindsym $mod+Down 	focus down
+bindsym $mod+Up 	focus up
+bindsym $mod+Right 	focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+Shift+v split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+grave move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+$left 	move left
+bindsym $mod+Shift+$down 	move down
+bindsym $mod+Shift+$up  	move up
+bindsym $mod+Shift+$right  	move right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -133,6 +57,87 @@ bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 
+# quick switch between workspaces
+workspace_auto_back_and_forth yes
+
+#################################################
+# Layout modifiers
+
+# split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#################################################
+# Floating settings
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+#################################################
+# View and focus modifications
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus urgent window
+bindsym $mod+u [urgent=latest] focus
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# move the currently focused window to the scratchpad
+#bindsym $mod+Shift+grave move scratchpad
+# Should be no need in that
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+grave scratchpad show
+
+#################################################
+# External calls
+
+# start a terminal
+bindsym $mod+Return exec urxvtc
+
+# start dmenu (uses fuzzy mod)
+bindsym $mod+Shift+d 		exec --no-startup-id "dmenu_run -z" 
+bindsym $mod+d 			exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -z"
+bindsym $mod+Shift+p 		exec --no-startup-id "passmenu"
+# --term="urxvtc "
+
+bindsym XF86MonBrightnessUp 	exec xbacklight -inc 2
+bindsym XF86MonBrightnessDown 	exec xbacklight -dec 2
+
+bindsym XF86AudioRaiseVolume 	exec ponymix increase 2
+bindsym XF86AudioLowerVolume 	exec ponymix decrease 2
+
+bindsym 		Print 	exec mkscr.sh -f -s -k
+bindsym Ctrl+		Print 	exec mkscr.sh -x -s -k
+bindsym 	Shift+	Print	exec mkscr.sh -f -i root
+bindsym Ctrl+	Shift+	Print 	exec mkscr.sh -x -i root
+
+#################################################
+# Dangerous actions
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -141,54 +146,23 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command    i3blocks
-    position          top
-    workspace_buttons yes
-    tray_output       none
-    
-    font pongo: Droid Sans Mono for Powerline 8
+#################################################
+# Modes
 
-    colors {
-        background #000000
-        statusline #ffffff
-
-        focused_workspace  #ffffff #285577
-        active_workspace   #ffffff #333333
-        inactive_workspace #888888 #222222
-        urgent_workspace   #ffffff #900000
-    }
-}
-
-
-bindsym XF86MonBrightnessUp 	exec xbacklight -inc 2
-bindsym XF86MonBrightnessDown 	exec xbacklight -dec 2
-
-bindsym XF86AudioRaiseVolume 	exec ponymix increase 2
-bindsym XF86AudioLowerVolume 	exec ponymix decrease 2
-
-bindsym Print 			exec mkscr.sh -f -s -k
-bindsym Ctrl+Print 		exec mkscr.sh -x -s -k
-bindsym Shift+Print 		exec mkscr.sh -f -i root
-bindsym Ctrl+Shift+Print 	exec mkscr.sh -x -i root
-
-#=======================[ MODES ]=========================
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink 	width	 10 px or 10 ppt
+        bindsym $down       resize grow 	height	 10 px or 10 ppt
+        bindsym $up         resize shrink 	height	 10 px or 10 ppt
+        bindsym $right      resize grow 	width	 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink 	width	 10 px or 10 ppt
+        bindsym Down        resize grow 	height	 10 px or 10 ppt
+        bindsym Up          resize shrink 	height	 10 px or 10 ppt
+        bindsym Right       resize grow 	width	 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -224,21 +198,24 @@ mode "$mode_displays" {
 }
 bindsym $mod+p mode "$mode_displays"
 
-#===========================[ MISC SETUP ]================================
-# quick switch between workspaces
-workspace_auto_back_and_forth yes
-bindsym $mod+u [urgent=latest] focus
+#################################################
+# Color settings
 
-
-# color settings
 #####  Color Palette by Paletton.com
 #####  Palette URL: http://paletton.com/#uid=10I0u0kmuind3rSirmtrodmy98o
-set   $c_wite  "#92662C"
-set   $c_lght  "#DEB784"
-set   $c_main  "#B3874C"
-set   $c_back  "#6A430F"
-set   $c_dark  "#432600"
+# set   $c_wite  "#92662C"
+# set   $c_lght  "#DEB784"
+# set   $c_main  "#B3874C"
+# set   $c_back  "#6A430F"
+# set   $c_dark  "#432600"
 #####  Generated by Paletton.com (c) 2002-2014
+
+set_from_resource   $c_wite  i3wm.foreground 	#92662C
+set_from_resource   $c_lght  i3wm.color15	#DEB784
+set_from_resource   $c_main  i3wm.color4 	#B3874C
+set_from_resource   $c_back  i3wm.color8 	#6A430F
+set_from_resource   $c_dark  i3wm.color0 	#432600
+
 # class                 border  backgr. text  indicator child_border
 client.focused          $c_dark $c_back $c_lght $c_lght $c_dark
 client.focused_inactive $c_dark $c_dark $c_main $c_lght $c_dark
@@ -248,26 +225,57 @@ client.placeholder      #ffffff #ffffff #ffffff #ffffff #ffffff
 
 client.background       #ffffff
 
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command    i3blocks
+    position          top
+    workspace_buttons yes
+    tray_output       none
+    
+    font pongo: Droid Sans Mono for Powerline 8
+
+    colors {
+        background #000000
+        statusline #ffffff
+
+        focused_workspace  #ffffff #285577
+        active_workspace   #ffffff #333333
+        inactive_workspace #888888 #222222
+        urgent_workspace   #ffffff #900000
+    }
+}
+
+
+#################################################
+# Default styles and positions
+
+# hide borders on the edge of screen
 hide_edge_borders both
 
-#===========================[ ASSIGN ]================================
+# no borders and titles
+default_border none
+default_floating_border pixel 3
+
+# assign windows to workspaces
 assign [class="URxvt" instance="Htop"] workspace 10
 assign [class="URxvt" instance="Log screen"] workspace 9
 assign [class="tixati"] workspace 8
-# Firefox setup
-assign [class=(Fire|Water)fox] workspace 2
-assign [class=Chromium] workspace 2
-for_window [class=(Fire|Water)fox] border none
-for_window [class=Chromium] border none
+
+assign [class=((Fire|Water)fox|Chromium|qutebrowser)] workspace 2
+assign [window_role=browser class=Vivaldi.*] workspace 2
 
 # terminal emulator in scratchpad
 for_window [instance="urxvtq" class="URxvt"] floating enable, border pixel 9, sticky enable, move scratchpad 
 # , resize set 1330 440 
 
-#===========================[ STARTUP ]================================
+#################################################
+# Startup
+
 exec --no-startup-id start-workspace.sh spad
 exec --no-startup-id start-workspace.sh htop
 exec --no-startup-id start-workspace.sh log
 
 exec urxvtc
 
+# vim:ts=8:sw=8
