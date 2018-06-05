@@ -44,3 +44,7 @@ gpg-agent/.gnupg/*
 # TODO: find a way to get rid of this
 dunst/dev/dunst-config/dunst-config
 
+# Youtube-dl
+# Just in case)
+**/.netrc
+
