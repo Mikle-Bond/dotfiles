@@ -14,6 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'sickill/vim-monokai'
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'dylanaraps/wal.vim'
 
 " ================== Syntaxes ===================
 " GLSL syntax
@@ -44,7 +45,7 @@ Plugin 'francoiscabrol/ranger.vim'
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
 Plugin 'majutsushi/tagbar'
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
@@ -72,7 +73,8 @@ set spelllang=ru_yo,en_us
 set background=dark
 
 " main color theme
-colorscheme molokai
+"colorscheme molokai
+colorscheme wal
 
 " -------------------------- Airline
 " don't hide statusbar
@@ -85,6 +87,10 @@ let g:airline#extensions#default#layout=[
 			\ ['a', 'b', 'c'],
 			\ ['x', 'y', 'z']
 			\ ]
+
+if empty($DISPLAY)
+	let g:airline#extensions#xkblayout#enabled = '0'
+endif
 
   "if !exists('g:airline_symbols')
     "let g:airline_symbols = {}
