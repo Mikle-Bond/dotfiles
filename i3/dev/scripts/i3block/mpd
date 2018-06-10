@@ -4,7 +4,7 @@ if [ `systemctl --user is-active mpd` != "active" ] ; then
 	echo OFF
 	exit 0
 fi
-exec 5<<< $(mpc current -f "%artist%\n%title%\n%file%") 
+exec 5<<< $(unset MPD_HOST ; mpc current -f "%artist%\n%title%\n%file%") 
 read -u 5 -r artist
 read -u 5 -r title
 read -u 5 -r filename

@@ -25,7 +25,8 @@ if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ] ; then
 	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
 
-export MPD_HOST="$XDG_CONFIG_HOME/mpd/socket"
+# export MPD_HOST="$XDG_CONFIG_HOME/mpd/socket"
+# Seems like idea of socket activation is a bad one...
 
 # DAMN, IT SHOULDN'T BE HERE
 [ -f $HOME/.bashrc ] && source $HOME/.bashrc
