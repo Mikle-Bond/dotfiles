@@ -7,3 +7,6 @@ export QT_QPA_PLATFORMTHEME=gtk2
 export QT_STYLE_OVERRIDE=gtk2
 # NB: Qt4 style is set by qtconfig-qt4 in ~/.config/Trolltech.conf
 
+# inform system about our choice
+dbus-update-activation-environment --systemd GTK_THEME GTK2_RC_FILES QT_STYLE_OVERRIDE
+

@@ -36,6 +36,14 @@ ulimit -c unlimited
 compton &
 numlockx &
 
-echo "starting at $(date)" >> ~/.i3/logfile
-exec i3 >> ~/.i3/logfile
+#systemctl --user start feh-background@5m.timer
+
+syndaemon -i 2 -R -K -d -t
+# xset led named "Num Lock"
+xset r rate 250 30
+# /home/mikle/dev/scripts/mpd_watch.sh &
+
+# echo "starting at $(date)" >> ~/.i3/logfile
+exec i3
+#exec xmonad
 

@@ -4,16 +4,8 @@ XTHEME="$HOME/.xtheme.sh"
 [ -f "$XTHEME" ] && . $XTHEME
 
 if [ -z ${DISPLAY+x} ] ; then 
-	echo "Running on display $DISPLAY"
-else
 	echo "The \$DISPLAY variable is not set"
+else
+	echo "Running on display $DISPLAY"
 fi
-
-systemctl --user start feh-background@5m.timer
-
-syndaemon -i 2 -R -K -d -t
-# xset led named "Num Lock"
-xset r rate 250 30
-# xrdb /home/mikle/.Xresourses
-# /home/mikle/dev/scripts/mpd_watch.sh &
 
