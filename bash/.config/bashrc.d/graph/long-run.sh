@@ -20,7 +20,7 @@ function timer_stop {
 	local timer_show="$(textify_delta_us "$delta_us")"
 	cmd="${cmd#*[0-9]*  }"
 
-	if ((delta_us > 1000000)) ; then 
+	if ((delta_us > 5000000)) ; then 
 		case "$cmd" in 
 			vim*|man*|ranger*) : ;;
 			*) notify-send "Process done" "Execuded '$cmd' for $timer_show" ;;

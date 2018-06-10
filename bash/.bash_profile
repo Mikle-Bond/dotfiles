@@ -1,4 +1,8 @@
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+# seems like I need it at least somewhere.
+# TODO: consider moving it to environment.d
+export XDG_DATA_DIRS=${XDG_DATA_DIRS:-${HOME}/.local/share}
+
 
 export HISTIGNORE="[ 	]*"
 export EDITOR=vim
