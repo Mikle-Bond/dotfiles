@@ -9,3 +9,5 @@ else
 	echo "Running on display $DISPLAY"
 fi
 
+export TERMINAL="urxvtc -e"
+
