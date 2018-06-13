@@ -34,6 +34,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'scrooloose/syntastic'
 Plugin 'lyokha/vim-xkbswitch'
 " Plugin 'vim-xkbswitch'
+Plugin 'lervag/vimtex'
 
 " ================== Navigation ===================
 Plugin 'christoomey/vim-tmux-navigator'
@@ -60,9 +61,6 @@ filetype plugin indent on
      
 " set mouse=a
 set spelllang=ru_yo,en_us
-" set keymap=russian-jcukenwin
-" set iminsert=0
-" set imsearch=0
 " highlight lCursor guifg=NONE guibg=Cyan
 
 " ---------------------------------
@@ -157,9 +155,14 @@ nmap <F8> :TagbarToggle<CR>
 let g:AutoClosePumvisible = {"ENTER": "", "ESC": ""}
 
 " -------------------------- XKB-switch
-let g:XkbSwitchEnable = 1
+" set keymap=russian-jcukenwin
+let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
-let g:XkbSwitchIMapings = ['ru']
+" let g:XkbSwitchIMappings = ['ru']
+" set iminsert=0
+" set imsearch=0
+
+
 
 " -------------------------- Vim-Markdown
 let g:vim_markdown_folding_disabled = 1
@@ -187,4 +190,14 @@ nnoremap <C-k> <C-w>k
 " ranger by francoiscabol
 let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
+
+" -------------------------- Vimtex
+let g:vimtex_enabled = 1
+let g:vimtex_view_method = 'zathura'
+
+if !exists('g:ycm_semantic_triggers')
+	let g:ycm_semantic_triggers = {}
+endif
+
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
