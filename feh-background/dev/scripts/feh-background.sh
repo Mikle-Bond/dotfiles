@@ -11,6 +11,13 @@
 	# feh --bg-fill $name
 # fi
 
-xwinwrap -nf -fs -d -b -sp -ov -- \
-	feh --randomize --bg-fill /home/mikle/.config/wallpapers/
+feh_call=(feh --randomize --bg-fill /home/mikle/.config/wallpapers/)
+
+if pgrep compton &> /dev/null ; then 
+	actwindow=$(xdotool getactivewindow)
+	xwinwrap -nf -fs -d -b -sp -ov -- "${feh_call[@]}"
+	xdotool windowactivate $actwindow
+else
+	"${feh_call[@]}"
+fi
 
