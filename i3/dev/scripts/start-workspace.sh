@@ -15,7 +15,7 @@ case "$1" in
 esac
 
 function daemon() {
-	cd /
+	cd ~
 	exec 0<&-
 	exec 1>/dev/null
 	exec 2>/dev/null
