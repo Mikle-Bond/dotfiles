@@ -116,7 +116,7 @@ bindsym $mod+grave scratchpad show
 bindsym $mod+Return exec urxvtc
 
 # start dmenu (uses fuzzy mod)
-bindsym $mod+Shift+d 		exec --no-startup-id "dmenu_run -z" 
+bindsym $mod+Shift+d 		exec --no-startup-id "dmenu_run -z"
 bindsym $mod+d 			exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -z"
 bindsym $mod+Shift+p 		exec --no-startup-id "passmenu"
 # --term="urxvtc "
@@ -178,7 +178,7 @@ bindsym $mod+r mode "resize"
 #     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
 #     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
 #     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
 #     # back to normal: Enter or Escape
 #     bindsym Return mode "default"
@@ -232,7 +232,7 @@ bar {
     position          top
     workspace_buttons yes
     tray_output       none
-    
+
     font pongo: Droid Sans Mono for Powerline 8
 
     colors {
@@ -257,6 +257,9 @@ hide_edge_borders both
 default_border none
 default_floating_border pixel 3
 
+# default layout
+workspace_layout tabbed
+
 # assign windows to workspaces
 assign [class="URxvt" instance="Htop"] workspace 10
 assign [class="URxvt" instance="Log screen"] workspace 9
@@ -266,8 +269,8 @@ assign [class=((Fire|Water)fox|Chromium|qutebrowser)] workspace 2
 assign [window_role=browser class=Vivaldi.*] workspace 2
 
 # terminal emulator in scratchpad
-for_window [instance="urxvtq" class="URxvt"] floating enable, border pixel 9, sticky enable, move scratchpad 
-# , resize set 1330 440 
+for_window [instance="urxvtq" class="URxvt"] floating enable, border pixel 9, sticky enable, move scratchpad
+# , resize set 1330 440
 
 #################################################
 # Startup
