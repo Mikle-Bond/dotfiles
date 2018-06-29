@@ -36,12 +36,20 @@ Plugin 'lyokha/vim-xkbswitch'
 " Plugin 'vim-xkbswitch'
 Plugin 'lervag/vimtex'
 
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+Plugin 'ervandew/supertab'
+
 " ================== Navigation ===================
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'rafaqz/ranger.vim'
 Plugin 'francoiscabrol/ranger.vim'
+Plugin 'zhou13/vim-easyescape'
+" Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'jlanzarotta/bufexplorer'
 
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
@@ -51,8 +59,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mmedvede/w3m.vim'
-Plugin 'dodie/vim-disapprove-deep-indentation'
+Plugin 'dodie/vim-disapprove-deep-indentation' " ಠ_ಠ
 Plugin 'fidian/hexmode'
+Plugin 'mikewest/vimroom'
 " Plugin ''
 
 call vundle#end()
@@ -61,6 +70,7 @@ filetype plugin indent on
      
 " set mouse=a
 set spelllang=ru_yo,en_us
+set scrolloff=4
 " highlight lCursor guifg=NONE guibg=Cyan
 
 " ---------------------------------
@@ -133,20 +143,28 @@ let g:NERDSpaceDelims=1
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
-" -------------------------- YCM 
+" -------------------------- YouCompleteMe
 let g:ycm_confirm_extra_conf=0
 let g:ycm_global_ycm_extra_conf='/home/mikle/.config/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion=['<TAB>']
-let g:ycm_key_list_previous_completion=['<S-TAB>']
+" let g:ycm_key_list_select_completion=['<TAB>']
+" let g:ycm_key_list_previous_completion=['<S-TAB>']
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_server_python_interpreter='/usr/bin/python2'
+let g:ycm_disable_for_files_larger_than_kb = 20
 
 nnoremap <leader>ji :YcmCompleter GoToImprecise<CR>
 nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jj :YcmCompleter GoTo<CR>
-nnoremap <leader>f :YcmCompleter FixIt<CR>
-nnoremap <leader>t :YcmCompleter GetType<CR>
+nnoremap <leader>jf :YcmCompleter FixIt<CR>
+nnoremap <leader>jt :YcmCompleter GetType<CR>
+
+" -------------------------- SuperTab
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " -------------------------- Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -162,8 +180,6 @@ let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
 " set iminsert=0
 " set imsearch=0
 
-
-
 " -------------------------- Vim-Markdown
 let g:vim_markdown_folding_disabled = 1
 set nofoldenable
@@ -175,8 +191,6 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-
-
 
 " ranger by rafaqz
 " map <leader>rr :RangerEdit<cr>
@@ -194,6 +208,7 @@ let g:ranger_replace_netrw = 1
 " -------------------------- Vimtex
 let g:vimtex_enabled = 1
 let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_open_on_warning = 0
 
 if !exists('g:ycm_semantic_triggers')
 	let g:ycm_semantic_triggers = {}
@@ -201,3 +216,44 @@ endif
 
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
+autocmd FileType tex call SetTexEnv()
+function! SetTexEnv()
+	" Get spellcheck
+	setlocal spell 
+	" Wrap lines (as I work on half screen with preview)
+	setlocal wrap nolist linebreak
+	" indent lines after wrap
+	setlocal breakindent breakindentopt=shift:2
+	" Fix navigation
+	nnoremap <buffer> j gj
+	nnoremap <buffer> k gk
+
+	" Make tabs default width 
+	setlocal softtabstop=2 shiftwidth=2
+	" Disable length mark
+	setlocal colorcolumn=0
+	" get spell check working
+	nnoremap <buffer> <leader>s hea<C-x><C-s>
+endfunction
+
+" -------------------------- easyescape
+
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 100
+cnoremap jk <ESC>
+cnoremap kj <ESC>
+
+" -------------------------- UniSnips
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
