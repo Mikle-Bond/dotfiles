@@ -81,47 +81,63 @@ set scrolloff=4
 set background=dark
 
 " main color theme
-"colorscheme molokai
+" colorscheme molokai
 colorscheme wal
+
+set guifont=DroidSansMonoForPowerline\ Nerd\ Font\ 12
 
 " -------------------------- Airline
 " don't hide statusbar
 set laststatus=2
 
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled=1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#default#layout=[
 			\ ['a', 'b', 'c'],
 			\ ['x', 'y', 'z']
 			\ ]
 
+
+" set the CN (column number) symbol:
+" let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+
 if empty($DISPLAY)
 	let g:airline#extensions#xkblayout#enabled = '0'
 endif
 
-  "if !exists('g:airline_symbols')
-    "let g:airline_symbols = {}
-  "endif
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
 
-  "" unicode symbols
-  "let g:airline_left_sep = '»'
-  "let g:airline_left_sep = '▶'
-  "let g:airline_right_sep = '«'
-  "let g:airline_right_sep = '◀'
-  "let g:airline_symbols.crypt = '🔒'
-  "let g:airline_symbols.linenr = '␊'
-  "let g:airline_symbols.linenr = '␤'
-  "let g:airline_symbols.linenr = '¶'
-  "let g:airline_symbols.maxlinenr = '☰'
-  "let g:airline_symbols.maxlinenr = ''
-  "let g:airline_symbols.branch = '⎇'
-  "let g:airline_symbols.paste = 'ρ'
-  "let g:airline_symbols.paste = 'Þ'
-  "let g:airline_symbols.paste = '∥'
-  "let g:airline_symbols.spell = 'Ꞩ'
-  "let g:airline_symbols.notexists = '∄'
-  "let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = '' " e0b0
+let g:airline_left_alt_sep = ""
+"
+let g:airline_right_sep = '' "e0b1
+let g:airline_right_alt_sep = ''
+" let g:airline_right_sep = "" "e0b6
+
+" let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+
+let g:airline_symbols.maxlinenr = ''
+" let g:airline_symbols.maxlinenr = '☰'
+" let g:airline_symbols.maxlinenr = ''
+
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+
+let g:airline_symbols.branch = ''
+" let g:airline_symbols.branch = '⎇'
+
+let g:airline_symbols.readonly = ''
+" let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
 " -------------------------- NERD
 " nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
