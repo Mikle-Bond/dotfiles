@@ -1,9 +1,19 @@
+*letterSpace: -5
 URxvt*letterSpace: -1
 
-URxvt*font:	xft:Droid Sans Mono for Powerline:pixelsize=13,\
-		xft:Noto Color Emoji:minspace=False,
-		xft:Unifont,\
-		9x15
+*.font: xft:Droid\ Sans\ Mono:size=10
+
+
+rofi.font: Droid Sans Mono 12
+URxvt.font:	\
+	xft:Droid Sans Mono for Powerline Nerd Font:size=10,\
+	xft:Noto Color Emoji:minspace=False,\
+	xft:Unifont:pixelsize=13,\
+	-*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
+
+! URxvt*font: xft:Inconsolata for Powerline Nerd Font:size=11
+
+! xft:Noto Color Emoji:minspace=False,\
 ! URxvt*font: xft:Droid Sans Mono for Powerline:pixelsize=13,xft:Symbola,xft:Noto Color Emoji:minspace=False
 ! URxvt*font: xft:Droid\ Sans\ Mono:pixelsize=13,xft:PowerlineSymbols:pixelsize=13
 
