@@ -12,6 +12,7 @@ It resides in the `$HOME/.dotfiles`.
 - i3wm (purely trough .xinitrc)
 - compton
 - pass
+- acpilight
 
 ##### TODOs
 

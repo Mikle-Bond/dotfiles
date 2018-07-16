@@ -121,9 +121,6 @@ bindsym $mod+d 			exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -z"
 bindsym $mod+Shift+p 		exec --no-startup-id "passmenu"
 # --term="urxvtc "
 
-bindsym XF86MonBrightnessUp 	exec xbacklight -inc 2
-bindsym XF86MonBrightnessDown 	exec xbacklight -dec 2
-
 bindsym XF86AudioRaiseVolume 	exec ponymix increase 2
 bindsym XF86AudioLowerVolume 	exec ponymix decrease 2
 
