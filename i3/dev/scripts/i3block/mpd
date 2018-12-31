@@ -9,11 +9,19 @@ read -u 5 -r artist
 read -u 5 -r title
 read -u 5 -r filename
 
-[[ "$filename" =~ 'dubstep-light.info' ]] && artist="${title%% - *}" && title="${title#* - }"
-# TODO case with filename-only string
-
 # echo "<span color='red'>$artist</span> - <span color='#0000ff'>$title</span>"
-echo "$artist - $title"
+if [[ "$filename" =~ 'http' ]] ; then
+	# artist="${title%% - *}"
+	# title="${title#* - }"
+	radio="${filename#http*//}"
+	radio="${radio%:*}"
+	radio="${radio%/*}"
+	echo "$title [$radio]"
+elif [ -z "$artist" -o -z "$title" ] ; then
+	echo "$filename"
+else
+	echo "$artist - $title"
+fi
 
 exit 0
 
