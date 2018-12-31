@@ -27,6 +27,8 @@ Plugin 'justinmk/vim-syntax-extra'
 " Needs to be together
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'neovimhaskell/haskell-vim'
+Plugin 'itchyny/vim-haskell-indent'
 
 " ================== Completers ===================
 " Plugin 'Townk/vim-autoclose'
@@ -61,7 +63,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mmedvede/w3m.vim'
 Plugin 'dodie/vim-disapprove-deep-indentation' " ಠ_ಠ
 Plugin 'fidian/hexmode'
-Plugin 'mikewest/vimroom'
+" Plugin 'mikewest/vimroom'
+Plugin 'junegunn/goyo.vim'
+Plugin 'amix/vim-zenroom2'
 " Plugin ''
 
 call vundle#end()
@@ -166,8 +170,8 @@ let g:ycm_global_ycm_extra_conf='/home/mikle/.config/.ycm_extra_conf.py'
 " let g:ycm_key_list_previous_completion=['<S-TAB>']
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_server_python_interpreter='/usr/bin/python2'
-let g:ycm_disable_for_files_larger_than_kb = 20
+let g:ycm_server_python_interpreter='/usr/bin/python3'
+let g:ycm_disable_for_files_larger_than_kb = 30
 
 nnoremap <leader>ji :YcmCompleter GoToImprecise<CR>
 nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
@@ -198,6 +202,7 @@ let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
 
 " -------------------------- Vim-Markdown
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
 set nofoldenable
 
 " -------------------------- Navigation
@@ -231,6 +236,13 @@ if !exists('g:ycm_semantic_triggers')
 endif
 
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
+autocmd FileType haskell call SetHsEnv()
+function! SetHsEnv()
+	setlocal tabstop=8 expandtab
+	setlocal softtabstop=4 shiftwidth=4
+	setlocal shiftround
+endfunction
 
 autocmd FileType tex call SetTexEnv()
 function! SetTexEnv()
@@ -273,3 +285,86 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" -------------------------- UniSnips
+
+nnoremap <silent> <leader>z :Goyo<cr>
+
+" -------------------------- Coolstuff
+" TODO: look into this
+
+" ]p -- paste with indent
+
+" separate backups
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+
+" compiler gcc
+set wildmenu
+set wildmode=list:longest,full
+
+" inoremap jj <Esc> -- kinda already jk
+" imap ii <C-[>
+" nnoremap jjjj <Nop>
+
+" tf is this?
+set incsearch 
+set nohidden
+" let g:clipbrdDefaultReg = '+'
+
+nnoremap <silent> zj o<Esc>
+nnoremap <silent> zk O<Esc>
+
+map n nzz
+map N Nzz
+
+set autochdir
+" autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+" autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
+" map <leader>cd :cd %:h
+
+" set cul 
+" hi CursorLine term=none cterm=none ctermbg=3
+
+set ttyfast
+set undolevels=1000
+set updatecount=100
+set complete=.,w,b,u,U,t,i,d
+set noerrorbells
+set visualbell
+set t_vb=
+
+map <leader>tl :set list!<cr>
+set showbreak=↪\
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+" set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
+match ErrorMsg '\s\+$'
+
+iab AlP ABCDEFGHIJKLMNOPQRSTUVWXYZ
+iab MoN January February March April May June July August September October November December
+iab MoO Jan Feb Mar Apr May Jun Jul Aug Sep Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+iab NuM 12345678901234567890123456789012345678901234567890123456789012345678901234567890 
+iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0
+
+" nnoremap ; :
+" nnoremap : ;
+
+" This is for working across multiple xterms and/or gvims
+" Transfer/read and write one block of text between vim sessions (capture whole line):
+" Write
+nmap ;w :. w! ~/.vimxfer<CR>
+vmap ;w :'<,'> w! ~/.vimxfer<CR>
+" Read
+nmap ;r :r ~/.vimxfer<CR>
+" Append 
+nmap ;a :. w! >>~/.vimxfer<CR>
+vmap ;a :'<,'> w! >>~/.vimxfer<CR>
+
+map <right> <ESC>:bn<RETURN>
+map <left> <ESC>:bp<RETURN>
+
+map - :nohls<CR>
+
+" set tags=tags;/
+
