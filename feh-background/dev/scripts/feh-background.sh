@@ -1,7 +1,7 @@
 #/bin/bash
 
 # cd ~/.config/wallpapers/
-# if [ -L current.png ] ; then 
+# if [ -L current.png ] ; then
 	# name="$(find -type f| egrep -v "`readlink current.png`|current.png" | shuf -n1)"
 	# ~/dev/scripts/mkfade.sh $name ./current.png
 	# unlink ./current.png
@@ -13,11 +13,20 @@
 
 feh_call=(feh --randomize --bg-fill /home/mikle/.config/wallpapers/)
 
-if pgrep compton &> /dev/null ; then 
-	actwindow=$(xdotool getactivewindow)
-	xwinwrap -nf -fs -d -b -sp -ov -- "${feh_call[@]}"
-	xdotool windowactivate $actwindow
-else
+fallback() {
 	"${feh_call[@]}"
+	exit 0
+}
+
+if pgrep compton &> /dev/null ; then
+	actwindow=$(xdotool getactivewindow 2> /dev/null )
+	[[ -z $actwindow ]] && fallback
+	(
+		xwinwrap -nf -fs -d -b -sp -ov -- "${feh_call[@]}"
+		xdotool windowactivate $actwindow
+	) 2> /dev/null
+	exit 0
 fi
+
+fallback
 
