@@ -180,10 +180,11 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -z -p dunst:
+    dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/waterfox -new-tab
+    # browser = /usr/bin/waterfox -new-tab
+    browser = /usr/bin/qutebrowser --target tab
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
@@ -287,6 +288,12 @@
 # to "".
 # NOTE: It might be helpful to run dunst -print in a terminal in order
 # to find fitting options for rules.
+
+[test-actions]
+appname = "test"
+urgency = normal
+timeout = 0
+
 
 #[espeak]
 #    summary = "*"
