@@ -266,7 +266,7 @@ assign [class=((Fire|Water)fox|Chromium|qutebrowser)] workspace 2
 assign [window_role=browser class=Vivaldi.*] workspace 2
 
 # terminal emulator in scratchpad
-for_window [instance="urxvtq" class="URxvt"] floating enable, border pixel 9, sticky enable, move scratchpad
+for_window [instance="urxvtq"] floating enable, border pixel 9, sticky enable, move scratchpad
 # , resize set 1330 440
 
 #################################################
