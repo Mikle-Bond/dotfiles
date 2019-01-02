@@ -18,8 +18,9 @@ It resides in the `$HOME/.dotfiles`.
 
 - [ ] Add links to external projects for quick access
 - [ ] Check how it works on other machines
-- [ ] Write scripts for managing new dotfiles (probably using rsync)
+- [x] Write scripts for managing new dotfiles (probably using rsync) (stow/dev/scripts/dot-get.sh)
 - [ ] Figure out what to do with system configs
 - [ ] Make `bash` config absolute from other packages
 - [ ] Clean up `compton*` configs.
-
+- [ ] Make shure .gitingores' are present where needed (qutebrowser, ranger, etc)
+- [ ] Come up with 3rd-party plugins/scripts management (ranger, mpv, vim, etc)
