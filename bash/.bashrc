@@ -41,4 +41,3 @@ unset config_dir
 # gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # vim:ts=2:sw=2
-

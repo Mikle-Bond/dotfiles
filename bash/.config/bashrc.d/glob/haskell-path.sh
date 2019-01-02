@@ -1,0 +1,3 @@
+
+PATH="${PATH}:~/.cabal/bin"
+

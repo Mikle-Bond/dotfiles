@@ -12,6 +12,9 @@ PATH="$HOME/bin:$PATH"
 PATH="$PATH:$HOME/dev/scripts"
 # The stuff I don't even remember what it does
 PATH="$PATH:/home/mikle/.cargo/bin:$HOME/go/bin"
+# Ruby gems path 
+export GEM_HOME=$HOME/.gem
+PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 
 # git@github.com:medlefsen/std.sh.git
 export STDSH_PATH="$HOME/git-repos/std.sh"
