@@ -55,8 +55,10 @@ main() {
 		exit 2
 	fi
 
+	local relpath="$(realpath --relative-to="$(dirname "$homed")" "$stowd")"
+
 	mkdir -vp "$(dirname "$stowd")"
-	mv -vi "$homed" "$stowd" && ln -vs "$stowd" "$homed"
+	mv -vi "$homed" "$stowd" && ln -vs "$relpath" "$homed"
 }
 
 main "$@"
