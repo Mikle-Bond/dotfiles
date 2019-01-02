@@ -230,7 +230,8 @@ bar {
     workspace_buttons yes
     tray_output       none
 
-    font pongo: Droid Sans Mono for Powerline 8
+    font pango: Terminus 8, Font Awesome 8
+    # font pango: Droid Sans Mono for Powerline 8, Font Awesome 8
 
     colors {
         background #000000

@@ -29,9 +29,9 @@ separator_block_width=15
 markup=none
 
 [mpd]
-command=~/dev/scripts/i3block/$BLOCK_NAME
+command=~/dev/scripts/i3block/mpd_idle
 markup=pango
-interval=1
+interval=persist
 signal=15
 
 # Volume indicator

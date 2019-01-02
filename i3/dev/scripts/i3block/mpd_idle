@@ -1,0 +1,98 @@
+#!/bin/bash
+# vim:ft=sh:sw=4:ts=4:
+
+# Note:
+# This script is designed to be run by i3blocks with intervral option set to "repeat" or "presist".
+# Thus it is this script's responsibility to manage delays.
+# It takes advantage of mpc-idle to schedule updates.
+
+mpc_delay=3
+off_msg="disabled"
+dummy="$off_msg"
+
+declare -A mpc_status_map=(
+	["playing"]=""
+	["paused"]=""
+	["stopped"]="" # "&#xf04d;" 
+)
+artist=""
+title=""
+filename=""
+
+mpd_state="$HOME/.config/mpd/state"
+
+# An alternative way of fetching info
+function get_var() {
+	# WARNING: This method (apparently) has latency about 2-3 seconds!
+	local var="$1"
+	state="$(grep "^$var" "$mpd_state" | head -1)"
+	echo "${state#$var: }"
+}
+
+# Legacy variant of next function
+function mpc_fetch_vars_old() {
+	exec 5<<< $(unset MPD_HOST ; mpc current -f "%artist%\n%title%\n%file%" 2>&1 ) 
+	read -u 5 -r artist
+	read -u 5 -r title
+	read -u 5 -r filename
+}
+
+# Ask mpd for current track
+function mpc_fetch_vars() {
+	mapfile -t args < <( unset MPD_HOST ; mpc current -f "%artist%\n%title%\n%file%" 2>&1 ) 
+	if [[ ${#args[@]} == 0 ]] ; then 
+		args=('' '' '')
+		status="stopped"
+	else 
+		status=$(mpc status | sed -nr '2s/\[(.*)\] .*$/\1/p')
+	fi
+	artist="${args[0]}"
+	title="${args[1]}"
+	filename="${args[2]}"
+}
+
+function generate_output() {
+	# echo "<span color='red'>$artist</span> - <span color='#0000ff'>$title</span>"
+	if [[ "$filename" =~ 'http' ]] ; then
+		# artist="${title%% - *}"
+		# title="${title#* - }"
+		radio="${filename#http*//}"
+		radio="${radio%:*}"
+		radio="${radio%/*}"
+		echo -n "$title [$radio]"
+	elif [ -z "$artist" -o -z "$title" ] ; then
+		echo -n "$filename"
+	else
+		echo -n "$artist - $title"
+	fi
+	echo " [${mpc_status_map[$status]}]"
+}
+
+function generate_idle() {
+	while : ; do
+		while [ $(systemctl --user is-active mpd) != "active" ] ; do
+			echo "$off_msg"
+			sleep $mpc_delay
+		done
+		echo "wake up"
+		echo "WAKE UP"
+		mpc idleloop player playlist 2> /dev/null || ( # interesting event types are 'player' and 'playlist'
+			echo "$off_msg"
+			sleep $mpc_delay
+		)
+		sleep 1 # you know, just in case...
+	done
+}
+
+generate_idle | while read -r dummy; do
+	if [[ $dummy == "$off_msg" ]]; then
+		echo OFF
+	else
+		mpc_fetch_vars
+		output="$(generate_output)"
+		echo "${output/&/&amp;}"
+	fi
+done
+
+exit 0
+
