@@ -1,0 +1,7 @@
+.git
+.gitignore
+.stow-local-ignore
+.*.example
+^/@.*
+README.*
+.DS_Store
