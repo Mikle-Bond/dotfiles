@@ -30,6 +30,10 @@ tags
 
 # End of https://www.gitignore.io/api/vim,linux
 
+# Globally hidden files
+*.backup
+*.disabled
+
 # MPD
 mpd/.config/mpd/pid
 mpd/.config/mpd/state
