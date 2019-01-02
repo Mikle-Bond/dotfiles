@@ -151,6 +151,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " -------------------------- NERDcommenter
 let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign='left'
+let g:NERDCommentEmptyLines=1
+let g:NERDTrimTrailningWhitespace=1
 
 " -------------------------- Syntastic
 "set statusline+=%#warningmsg#
