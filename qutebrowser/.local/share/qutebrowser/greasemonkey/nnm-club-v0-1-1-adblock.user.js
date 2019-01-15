@@ -340,11 +340,8 @@ if (false || (document.domain == "nnm-club.me" || document.domain.substring(docu
 		"    color: #000;",
 		"}",
 		".wrap {",
-		"    position: absolute;",
 		"    border-radius: 0px;",
 		"    top: 0px;",
-		"    margin-left: 50%;",
-		"    margin-right: 50%;",
 		"    left: -615px;",
 		"}",
 		"a {",
@@ -695,6 +692,9 @@ if (false || (document.domain == "nnm-club.me" || document.domain.substring(docu
 	].join("\n");
 if (false || (document.location.href.indexOf("http://nnm-club.me/forum/viewtopic.php") == 0) || (document.location.href.indexOf("http://nnmclub.to/forum/viewtopic.php") == 0) || (document.location.href.indexOf("http://nnm-club.name/forum/viewtopic.php") == 0) || (document.location.href.indexOf("http://nnm-club.tv/forum/viewtopic.php") == 0))
 	css += [
+		"body div.wrap {",
+		"    margin: 10px auto !important;",
+		"}",
 		"table[width=\'100%\'][cellspacing=\'2\'][cellpadding=\'2\']:first-of-type {",
 		"    background-color: #fff;",
 		"    vertical-align: middle;",
