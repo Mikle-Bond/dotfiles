@@ -5,9 +5,11 @@ set nocompatible
 " git clone https://github.com/VundleVim/Vundle.vim.git
 " ~/.vim/bundle/Vundle.vim
 
+" -------------------------- Vundle {{{
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-  
+
 Plugin 'gmarik/Vundle.vim'
 
 " ================== Colorchemes ===================
@@ -23,7 +25,7 @@ Plugin 'sophacles/vim-processing'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'aklt/plantuml-syntax'
 " flex, bison and c syntaxes
-Plugin 'justinmk/vim-syntax-extra' 
+Plugin 'justinmk/vim-syntax-extra'
 " Needs to be together
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -45,13 +47,14 @@ Plugin 'ervandew/supertab'
 
 " ================== Navigation ===================
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'rafaqz/ranger.vim'
 Plugin 'francoiscabrol/ranger.vim'
-Plugin 'zhou13/vim-easyescape'
+" Plugin 'zhou13/vim-easyescape'
 " Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'pelodelfuego/vim-swoop' " <leader>l
 
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
@@ -66,31 +69,59 @@ Plugin 'fidian/hexmode'
 " Plugin 'mikewest/vimroom'
 Plugin 'junegunn/goyo.vim'
 Plugin 'amix/vim-zenroom2'
+Plugin 'jceb/vim-orgmode'
 " Plugin ''
 
 call vundle#end()
-    
+
 filetype plugin indent on
-     
-" set mouse=a
+" }}}
+" -------------------------- Vim {{{
+
+set background=dark
+" colorscheme molokai
+colorscheme wal
+set guifont=DroidSansMonoForPowerline\ Nerd\ Font\ 12
+set fileencodings=ucs-bom,utf8,cp1251,default,latin1
 set spelllang=ru_yo,en_us
 set scrolloff=4
 " highlight lCursor guifg=NONE guibg=Cyan
 
-" ---------------------------------
-" Plugins Section
+" separate backups
+" NB: both folders has to be created
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
 
-" -------------------------- Theme
-" color gamma
-set background=dark
+" This is for working across multiple xterms and/or gvims
+" Transfer/read and write one block of text between vim sessions (capture whole line):
+" Write
+nmap ;w :. w! ~/.vimxfer<CR>
+vmap ;w :'<,'> w! ~/.vimxfer<CR>
+" Read
+nmap ;r :r ~/.vimxfer<CR>
+" Append
+nmap ;a :. w! >>~/.vimxfer<CR>
+vmap ;a :'<,'> w! >>~/.vimxfer<CR>
 
-" main color theme
-" colorscheme molokai
-colorscheme wal
+map <silent> - :nohls<CR>
 
-set guifont=DroidSansMonoForPowerline\ Nerd\ Font\ 12
+map n nzz
+map N Nzz
 
-" -------------------------- Airline
+" moving through splits
+nnoremap <leader>v <C-w>v
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" cycling through buffers
+map <right> <ESC>:bn<RETURN>
+map <left> <ESC>:bp<RETURN>
+
+" }}}
+" -------------------------- Airline {{{
 " don't hide statusbar
 set laststatus=2
 
@@ -98,11 +129,7 @@ let g:airline_powerline_fonts=0
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline#extensions#default#layout=[
-			\ ['a', 'b', 'c'],
-			\ ['x', 'y', 'z']
-			\ ]
-
+let g:airline#extensions#default#layout=[ ['a', 'b', 'c'], ['x', 'y', 'z'] ]
 
 " set the CN (column number) symbol:
 " let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
@@ -143,19 +170,20 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" -------------------------- NERD
-" nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
-map <c-n> :NERDTreeToggle<CR>
-let g:nerdtree_tans_open_on_console_startup=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" -------------------------- NERDcommenter
+" }}}
+" -------------------------- NERD {{{
+" map <c-n> :NERDTreeToggle<CR>
+" let g:nerdtree_tans_open_on_console_startup=1
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" }}}
+" -------------------------- NERDcommenter {{{
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign='left'
 let g:NERDCommentEmptyLines=1
 let g:NERDTrimTrailningWhitespace=1
 
-" -------------------------- Syntastic
+" }}}
+" -------------------------- Syntastic {{{
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -166,7 +194,8 @@ let g:NERDTrimTrailningWhitespace=1
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
-" -------------------------- YouCompleteMe
+" }}}
+" -------------------------- YouCompleteMe {{{
 let g:ycm_confirm_extra_conf=0
 let g:ycm_global_ycm_extra_conf='/home/mikle/.config/.ycm_extra_conf.py'
 " let g:ycm_key_list_select_completion=['<TAB>']
@@ -182,20 +211,24 @@ nnoremap <leader>jj :YcmCompleter GoTo<CR>
 nnoremap <leader>jf :YcmCompleter FixIt<CR>
 nnoremap <leader>jt :YcmCompleter GetType<CR>
 
-" -------------------------- SuperTab
+" }}}
+" -------------------------- SuperTab {{{
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" -------------------------- Tagbar
+" }}}
+" -------------------------- Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
 
-" -------------------------- vim-autoclose
+" }}}
+" -------------------------- vim-autoclose {{{
 let g:AutoClosePumvisible = {"ENTER": "", "ESC": ""}
 
-" -------------------------- XKB-switch
+" }}}
+" -------------------------- XKB-switch {{{
 " set keymap=russian-jcukenwin
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
@@ -203,18 +236,14 @@ let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
 " set iminsert=0
 " set imsearch=0
 
-" -------------------------- Vim-Markdown
+" }}}
+" -------------------------- Vim-Markdown {{{
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 set nofoldenable
 
-" -------------------------- Navigation
-
-nnoremap <leader>v <C-w>v
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+" }}}
+" -------------------------- Ranger {{{
 
 " ranger by rafaqz
 " map <leader>rr :RangerEdit<cr>
@@ -229,7 +258,8 @@ nnoremap <C-k> <C-w>k
 let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
-" -------------------------- Vimtex
+" }}}
+" -------------------------- Vimtex {{{
 let g:vimtex_enabled = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_quickfix_open_on_warning = 0
@@ -250,7 +280,7 @@ endfunction
 autocmd FileType tex call SetTexEnv()
 function! SetTexEnv()
 	" Get spellcheck
-	setlocal spell 
+	setlocal spell
 	" Wrap lines (as I work on half screen with preview)
 	setlocal wrap nolist linebreak
 	" indent lines after wrap
@@ -259,7 +289,7 @@ function! SetTexEnv()
 	nnoremap <buffer> j gj
 	nnoremap <buffer> k gk
 
-	" Make tabs default width 
+	" Make tabs default width
 	setlocal softtabstop=2 shiftwidth=2
 	" Disable length mark
 	setlocal colorcolumn=0
@@ -267,14 +297,16 @@ function! SetTexEnv()
 	nnoremap <buffer> <leader>s hea<C-x><C-s>
 endfunction
 
-" -------------------------- easyescape
+" }}}
+" -------------------------- easyescape {{{
 
-let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 100
-cnoremap jk <ESC>
-cnoremap kj <ESC>
+" let g:easyescape_chars = { "j": 1, "k": 1 }
+" let g:easyescape_timeout = 100
+" cnoremap jk <ESC>
+" cnoremap kj <ESC>
 
-" -------------------------- UniSnips
+" }}}
+" -------------------------- UniSnips {{{
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<c-tab>"
@@ -289,19 +321,24 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" -------------------------- UniSnips
+" }}}
+" -------------------------- Goyo {{{
+function! s:goyo_enter()
+	set wrap
+	set linebreak
+	set nolist
+	nnoremap j gj
+	nnoremap k gk
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
 
 nnoremap <silent> <leader>z :Goyo<cr>
 
-" -------------------------- Coolstuff
+" }}}
+" -------------------------- Coolstuff {{{
 " TODO: look into this
 
 " ]p -- paste with indent
-
-" separate backups
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
 
 " compiler gcc
 set wildmenu
@@ -312,22 +349,19 @@ set wildmode=list:longest,full
 " nnoremap jjjj <Nop>
 
 " tf is this?
-set incsearch 
+set incsearch
 set nohidden
 " let g:clipbrdDefaultReg = '+'
 
 nnoremap <silent> zj o<Esc>
 nnoremap <silent> zk O<Esc>
 
-map n nzz
-map N Nzz
-
 set autochdir
 " autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 " autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 " map <leader>cd :cd %:h
 
-" set cul 
+" set cul
 " hi CursorLine term=none cterm=none ctermbg=3
 
 set ttyfast
@@ -347,27 +381,13 @@ match ErrorMsg '\s\+$'
 iab AlP ABCDEFGHIJKLMNOPQRSTUVWXYZ
 iab MoN January February March April May June July August September October November December
 iab MoO Jan Feb Mar Apr May Jun Jul Aug Sep Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
-iab NuM 12345678901234567890123456789012345678901234567890123456789012345678901234567890 
+iab NuM 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0
 
 " nnoremap ; :
 " nnoremap : ;
 
-" This is for working across multiple xterms and/or gvims
-" Transfer/read and write one block of text between vim sessions (capture whole line):
-" Write
-nmap ;w :. w! ~/.vimxfer<CR>
-vmap ;w :'<,'> w! ~/.vimxfer<CR>
-" Read
-nmap ;r :r ~/.vimxfer<CR>
-" Append 
-nmap ;a :. w! >>~/.vimxfer<CR>
-vmap ;a :'<,'> w! >>~/.vimxfer<CR>
-
-map <right> <ESC>:bn<RETURN>
-map <left> <ESC>:bp<RETURN>
-
-map - :nohls<CR>
-
 " set tags=tags;/
 
+" }}}
+" vim: fdm=marker:
