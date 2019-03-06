@@ -27,38 +27,40 @@ main() {
 	local package="$1"
 	local file="$2"
 
-	local pkghome="$HOME/.dotfiles"
-	local pkg="$pkghome/$package"
+	local STOW_HOME="$HOME/.dotfiles"
+	local pkg="$STOW_HOME/$package"
 
-	local homed="$(get_norm_name "$file")"
-	local common="${homed#$HOME/}"
+	local fpath_full="$(get_norm_name "$file")"
+	local fpath_home="${fpath_full#$HOME/}"
 
-	if [[ $homed == $common ]]; then
-		echo "File '$homed' is not under '$HOME'"
+	if [[ $fpath_full == $fpath_home ]]; then
+		echo "File '$fpath_full' is not under '$HOME'"
 		exit 3
 	fi
-	if [[ $homed =~ ^$pkghome ]]; then
-		echo "File '$homed' is under '$pkghome'"
+	if [[ $fpath_full =~ ^$STOW_HOME ]]; then
+		echo "File '$fpath_full' is under '$STOW_HOME'"
 		exit 4
 	fi
 
-	local stowd="$pkg/$common"
+	local fpath_stow="$pkg/$fpath_home"
 
-	echo "Original: '$homed'"
-	echo "Packaged: '$stowd'"
+	echo "Original: '$fpath_full'"
+	echo "Packaged: '$fpath_stow'"
 
 	local real="$(realpath "$file")"
-	if [[ $real =~ ^"$pkghome" ]]; then
-		package="${real#$pkghome/}"
+	if [[ $real =~ ^"$STOW_HOME" ]]; then
+		package="${real#$STOW_HOME/}"
 		package="${package%%/*}"
-		echo "File '$homed' is actually a '$real' thuth it belongs to package '${package}'"
+		echo "File '$fpath_full' is actually a link to '$real'"`
+			`"thuth it belongs to package '${package}'"
 		exit 2
 	fi
 
-	local relpath="$(realpath --relative-to="$(dirname "$homed")" "$stowd")"
+	local relpath="$(realpath --relative-to="$(dirname "$fpath_full")" "$fpath_stow")"
+	echo "Relative link: $relpath"
 
-	mkdir -vp "$(dirname "$stowd")"
-	mv -vi "$homed" "$stowd" && ln -vs "$relpath" "$homed"
+	mkdir -vp "$(dirname "$fpath_stow")"
+	mv -vi "$fpath_full" "$fpath_stow" && ln -vs "$relpath" "$fpath_full"
 }
 
 main "$@"
