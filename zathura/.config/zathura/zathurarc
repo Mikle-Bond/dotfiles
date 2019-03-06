@@ -1,0 +1,4 @@
+set recolor true
+set recolor-keephue true
+include /home/mikle/.cache/wal/colors-zathura
+

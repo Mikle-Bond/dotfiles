@@ -1,0 +1,3 @@
+set recolor-darkcolor "{foreground}"
+set recolor-lightcolor "{background}"
+
