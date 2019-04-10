@@ -25,4 +25,6 @@ alias hr="ping $(ip ro s default | awk '{print $3}')"
 
 alias tomoji="docker run -i --rm rsimmons/tomoji" 
 
+alias cat='bat'
+
 # vim:ts=2:sw=2
