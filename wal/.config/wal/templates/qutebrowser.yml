@@ -48,6 +48,10 @@ colors:
             odd:
                 fg: "{background}"
                 bg: "{foreground}"
+        indicator:
+            start: "{color3}"
+            stop: "{color2}"
+            error: "{color1}"
     completion:
         category:
             bg: "{color6}"
@@ -95,15 +99,15 @@ colors:
             fg: "{color3}"
     messages:
         error:
-            fg: "{foreground}"
+            fg: "{background}"
             bg: "{color1}"
             border: "{color1}"
         info:
-            fg: "{foreground}"
+            fg: "{background}"
             bg: "{color2}"
             border: "{color2}"
         warning:
-            fg: "{foreground}"
+            fg: "{background}"
             bg: "{color3}"
             border: "{color3}"
     prompts:
