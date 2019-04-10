@@ -42,6 +42,15 @@ URxvt*pointerBlank: true
 URxvt*fading: 20
 URxvt*fadeColor: #1e1e1e 
 
+! Plugins
+URxvt.perl-ext: default,selection-to-clipboard,url-select,keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s:      perl:keyboard-select:search
+URxvt.keysym.M-u:      perl:url-select:select_next
+URxvt.url-select.launcher:  /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.keyboard-select.clipboard: true
+
 ! Colors
 #include ".cache/wal/colors.Xresources"
 !include ".Xresources.d/monokai"
