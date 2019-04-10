@@ -29,7 +29,7 @@ fi
 
 xset -dpms s off -b
 xsetroot -solid "#1e1e1e"
-( feh --bg-scale --no-fehbg "$(< "${HOME}/.cache/wal/wal")" )&
+# ( feh --bg-scale --no-fehbg "$(< "${HOME}/.cache/wal/wal")" )&
 
 ulimit -c unlimited
 
@@ -37,6 +37,7 @@ compton &
 numlockx &
 
 #systemctl --user start feh-background@5m.timer
+systemctl --user restart feh-background
 
 syndaemon -i 2 -R -K -d -t
 # xset led named "Num Lock"
