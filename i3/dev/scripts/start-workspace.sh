@@ -9,9 +9,14 @@ if [ "$1" = '-d' ] ; then
 fi
 
 case "$1" in
-	htop) PROGRAM=(urxvt -name Htop -e htop) ;;
-	log)  PROGRAM=(urxvt -name "Log screen" -e log_screen.sh) ;;
-	spad) PROGRAM=(urxvt -name urxvtq -g 166x21+15+30) ;;
+	htop)  PROGRAM=(urxvt -name Htop -e htop) ;;
+	log)   PROGRAM=(urxvt -name "Log screen" -e log_screen.sh) ;;
+	stash) PROGRAM=(urxvt -name urxvtq -g 166x21+15+30) ;;
+	*)
+		echo "No, you want STASH!"
+		echo "...or LOG, or HTOP..."
+		exit 1
+		;;
 esac
 
 function daemon() {
