@@ -127,10 +127,10 @@ bindsym $mod+Shift+p 		exec --no-startup-id "passmenu"
 bindsym XF86AudioRaiseVolume 	exec ponymix increase 2
 bindsym XF86AudioLowerVolume 	exec ponymix decrease 2
 
-bindsym 		Print 	exec mkscr.sh -f -s -k
-bindsym Ctrl+		Print 	exec mkscr.sh -x -s -k
-bindsym 	Shift+	Print	exec mkscr.sh -f -i root
-bindsym Ctrl+	Shift+	Print 	exec mkscr.sh -x -i root
+bindsym 		Print 	exec mkscr.sh -l
+bindsym Ctrl+		Print 	exec mkscr.sh -l -c
+bindsym 	Shift+	Print	exec mkscr.sh -l -f
+bindsym Ctrl+	Shift+	Print 	exec mkscr.sh -l -c -f
 
 #################################################
 # Dangerous actions
