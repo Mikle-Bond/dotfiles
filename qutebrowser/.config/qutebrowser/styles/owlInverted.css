@@ -1,0 +1,111 @@
+/* vim: set sts=4 sw=4 expandtab : */
+
+/* This file originates from Owl plugin for Firefox.
+ * The original version can be found here: https://github.com/CptFoobar/Owl
+ */
+
+html {
+    filter: invert(95%) hue-rotate(180deg) brightness(110%) contrast(90%) !important; overflow: auto;
+}
+
+/* Revert filter on images and others */
+/* html>* [style*="url"]:not([style*="base64, R0lGODlhAQABAI"]), */
+:-webkit-full-screen:not(iframe),
+/* iframe:not(:-webkit-full-screen), */
+
+img,
+/* iframe, */
+*:not(object):not(body)>embed:not(video),
+object,
+*[style*="background:url"]:empty,
+*[style*="background-image:url"]:empty,
+*[style*="background: url"]:empty,
+*[style*="background-image: url"]:empty {
+    filter: brightness(95%) invert(105%) hue-rotate(180deg) !important;
+}
+/* Google homepage user image */
+a[title^="Google Account: "]>span,
+a[aria-label="Change profile picture."] div[title="Profile"]
+{
+    filter: brightness(90%) invert(95%) hue-rotate(180deg) !important;
+}
+/* Google Inbox icons fix */
+.pE, .HH{
+    filter: brightness(90%) invert(95%) hue-rotate(180deg) !important;
+}
+.du.ew, div.l9 > div:not(.I7) {
+    filter: invert(95%);
+}
+
+video {
+    filter: brightness(95%) invert(105%) hue-rotate(180deg) contrast(111%) !important;
+}
+
+iframe > html,
+:-moz-full-screen * {
+    filter: none !important;
+}
+
+/* Wikipedia formulas fix */
+img.mwe-math-fallback-image-inline {
+    filter: none !important;
+}
+
+/* Quick'n'dity background adjustments */
+html {
+    background-color: rgb(30, 30, 30) !important;
+    overflow: auto;
+    min-height: 100%;
+}
+
+.irc_bg {
+    background-color: #2b2b2b;
+}
+
+/* Google images image preview banner */
+#irc_cc {
+    background-color: #dfdfdf;
+}
+
+.irc_pt, ._Hcb{
+    color: #383838;
+}
+
+/* Scrollbar adjustment */
+::-webkit-scrollbar {
+    max-width: 10px !important;
+    max-height: 10px !important;
+    background: var(--background) !important;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background: var(--background) !important;
+}
+::-webkit-scrollbar-thumb {
+    /* border-radius: 5px !important; */
+    background: rgba(80, 80, 80, 0.6) !important;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(96, 96, 96, 0.6) !important;
+}
+
+/* Yahoo navigation fix */
+.Row.Pend-10 {
+    background: #f9f9f9 !important;
+}
+
+/* Gist GitHub fix */
+div.suggester-container {
+    transform: none !important;
+}
+/* Google video carousel fix */
+g-scrolling-carousel > div {
+    transform: none !important;
+}
+
+/*
+youtube player fix:
+iframe, .html5-video-player, .has-custom-banner, #theater-background, *:not(.html5-video-player):not(.channel-header-profile-image-container):not(.html5-storyboard-filmstrip):not(.html5-storyboard-framepreview):not(.html5-storyboard-lens) > img {
+filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(90%) !important;
+}
+*/

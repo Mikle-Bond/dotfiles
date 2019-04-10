@@ -1,0 +1,1 @@
+/home/mikle/.config/qutebrowser/styles/global.user.js
