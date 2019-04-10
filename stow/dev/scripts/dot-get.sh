@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o pipefail
+set -o errexit
+
 get_norm_name() {
 	local file="$1"
 	local dir="$(dirname "$file")"
@@ -47,7 +50,7 @@ main() {
 	echo "Original: '$fpath_full'"
 	echo "Packaged: '$fpath_stow'"
 
-	local real="$(realpath "$file")"
+	local real="$(realpath "$fpath_full")"
 	if [[ $real =~ ^"$STOW_HOME" ]]; then
 		package="${real#$STOW_HOME/}"
 		package="${package%%/*}"
@@ -56,7 +59,7 @@ main() {
 		exit 2
 	fi
 
-	local relpath="$(realpath --relative-to="$(dirname "$fpath_full")" "$fpath_stow")"
+	local relpath="$(realpath -m --relative-to="$(dirname "$fpath_full")" "$fpath_stow")"
 	echo "Relative link: $relpath"
 
 	mkdir -vp "$(dirname "$fpath_stow")"
