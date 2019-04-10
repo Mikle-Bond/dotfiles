@@ -64,7 +64,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "${xrdb:color13}"
+    frame_color = "{color13}"
 
     # Define a color for the separator.
     # possible values are:
@@ -125,7 +125,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<span color='${xrdb:color12}'>[%a]</span> <b>%s</b> %p\n== %b"
+    format = "<span color='{color12}'>[%a]</span> <b>%s</b> %p\n== %b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -242,30 +242,30 @@
     history = mod4+shift+i
 
     # Context menu.
-    context = mod4+a
+    context = mod4+shift+o
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    frame_color = "${xrdb:color0}"
-    background = "${xrdb:background}"
-    foreground = "${xrdb:color15}"
+    frame_color = "{color0}"
+    background = "{background}"
+    foreground = "{color15}"
     timeout = 3
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    frame_color = "${xrdb:color4}"
-    background = "${xrdb:background}"
-    foreground = "${xrdb:foreground}"
+    frame_color = "{foreground}"
+    background = "{background}"
+    foreground = "{foreground}"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_critical]
-    frame_color = "${xrdb:color1}"
-    background = "${xrdb:background}"
-    foreground = "${xrdb:color9}"
+    frame_color = "{color4}"
+    background = "{background}"
+    foreground = "{color9}"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
