@@ -3,87 +3,86 @@
 shopt -s extglob
 shopt -o pipefail
 
-if [ -z ${QUTE_URL+set} ] ; then 
+if [ -z ${QUTE_URL+set} ] ; then
 	QUTE_URL="$1"
 fi
 
 copy_url=false
 nurun=false
 
+# The current target page to resolve
 URL="$QUTE_URL"
+# Possible redirections
+TARGETS=()
 
+# Debugging utilities
 function dbg() { echo "DEBUG: $*" >&2 ; }
 function ns() { notify-send "mpv.sh" "${*//&/&amp;}" ; }
+function fail() { echo "$@" >&2 ; exit 1 ; }
 
+# Fetch url by selector
 function pup_url() {
 	local url="$1"
 	local selector="${*:2}"
 
 	dbg "url = $url, selector = $selector"
-	
+
 	wget -qO - "$url" | pup -p "$selector"
 }
 
-function handle_sa() {
-	local sub_url="$1"
-	local vid_url="$URL"
-
-	exec mpv --v --profile=low-latency --video-sync=display-adrop --sub-file="$sub_url" "$vid_url" # --cache=16384 --profile=low-latency
-	ns "spawning video from smotret-anime.ru failed\nnum = $number \nvideo is $vid_url"
-}
+#==========================================================
+# Handlers
 
 function handle_sa_url() {
-	# handles url to play page
+	#-------------------BROKEN--------------------#
+	# But kinda pruf of concept.
+
 	link_array=(
 		$( pup_url "$URL" 'div.m-translation-view-download > a attr{href}' )
 	)
 	set -- "${link_array[@]}"
-	
-	[[ "$URL" =~ 1080$ ]] && shift
-	
-	local vid_url="$URL"
+
+	[[ "$1" =~ 1080$ ]] && shift
+
+	local vid_url="$1"
 	local sub_url="${!#}"
 
-	handle_sa "$vid_url" "$sub_url"
+	exec mpv --profile=low-latency --video-sync=display-adrop --sub-file="$sub_url" "$vid_url" # --cache=16384 --profile=low-latency
 }
-
-function handle_sa_num() {
-	#-------------------BROKEN--------------------#
-	local number="$1"
-
-	local vid_url="http://smotret-anime.ru/translations/mp4/${number}?format=mp4"
-	local sub_url="http://smotret-anime.ru/translations/ass/${number}?download=1"
-
-	handle_sa "$vid_url" "$sub_url"
-}
-
 
 handle_shikimori() {
-	#-------------------BROKEN--------------------#
-	local url="$URL"
-	
-	url="${url%/}"
-	if [[ "$url" =~ ^.*video_online/[^/]*$ ]] ; then 
-		url=$( pup_url "$url" `
-			`'.video-variant-group[data-kind="subtitles"] '`
-			`'a.working:parent-of(span:contains("smotret-anime.ru")) '`
-			`'attr{href}' | head -1
-		)
-		# ns "redirecting: url = $url"
+	local url="${URL%/}"
+
+	if [[ "$url" =~ ^.*video_online/[^/]*$ ]] ; then
+		local html="$(pup_url "$url" 'div.video-variant-group[data-kind="subtitles"]')"
+		local urls=( $(echo "$html" | pup -p "a attr{href}" ) )
+
+		# local labels=( $(echo "$html" `
+		#         `| pup -p "span.video-author text{}" `
+		#         `| sed -ne 's/^\s*//;5~9{h};8~9{G;s/\n/ -- /;p}' ) )
+
+		# HOLLY SH*T, JUST LOOK AT THIS: https://stackoverflow.com/questions/20157938/exit-code-of-variable-assignment-to-command-substitution-in-bash
+		# Thank you, Adrian Günter)
+		local choise
+		choise=( $( echo "$html" `
+			` | pup -p "a json{}" `
+			` | jq -r 'map (.children | map({ (.class|scan("video[^ ]*")) : .text }) | add ) | '`
+				 `'map("\(."video-hosting") -- \(."video-author" // "unknown")") | .[]' `
+			` | tee /dev/stderr `
+			` | rofi -dmenu -i -format i
+		) ) || fail "No file chosen"
+		TARGETS=( "${urls[$choise]}" )
+	else
+		TARGETS=( $(pup_url "$url" ".player-container .player-area > iframe attr{src}") )
 	fi
-
-	local vid_url=$(pup_url "$url" ".player-container .player-area > iframe attr{src}")
-	local number="${vid_url##*/}"
-
-	handle_sa_num "$number"
 }
 
 handle_cartoonsub() {
 	dbg "page address: $URL"
 
 	# find inner iframe with video
-	URLS=( $(pup_url "$URL" "div.contentVideo > p > iframe attr{src}") )
-	URLS+=( $(pup_url "$URL" "div.contentVideo > script" | egrep -o 'https?://[^ "]+') )
+	TARGETS=( $(pup_url "$URL" "div.contentVideo > p > iframe attr{src}") )
+	TARGETS+=( $(pup_url "$URL" "div.contentVideo > script" | egrep -o 'https?://[^ "]+') )
 }
 
 handle_stormo_embed() {
@@ -93,18 +92,39 @@ handle_stormo_embed() {
 	dbg "script calls for files $vid"
 
 	# extract urls
-	URLS=( $(echo $vid | egrep -o 'https?://[^ ,?]+' | sed -r 's,/$,,; /low/d ') )
+	TARGETS=( $(echo $vid | egrep -o 'https?://[^ ,?]+' | sed -r 's,/$,,; /low/d ') )
 }
 
 handle_dokpub() {
-	URLS=( "${URL#*yandex/get/}" )
+	TARGETS=( "${URL#*yandex/get/}" )
+}
+
+handle_sibnet_bad() {
+	youtube-dl --quiet -o - `
+	` --add-header 'Host: video.sibnet.ru' `
+	` --add-header 'Accept: */*' `
+	` --add-header 'Referer: '"$URL" `
+	` --add-header 'User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36' `
+	` --add-header 'Range: bytes=0-' `
+	` "$URL" | mpv - || fail "something failed"
+}
+
+handle_sibnet() {
+	local useragent='Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36'
+	mpv '--ytdl-raw-options='`
+		`'add-header="'"'"'Host: video.sibnet.ru'"'"'",'`
+		`'add-header="'"'"'User-Agent: '"$useagent'"'",'`
+		`'add-header="'"'"'Accept: */*'"'"'",'`
+		`'add-header="'"'"'Referer: '"$URL'"'",'`
+		`'add-header="'"'"'Range: bytes=0-'"'"'",'`
+		`'verbose='` ` "$URL"
 }
 
 handle_default() {
-	if (( copy_url == true )) ; then 
+	if (( copy_url == true )) ; then
 		echo "$URL" | xclip -sel clip -i
 	fi
-	if (( norun == true )) ; then 
+	if (( norun == true )) ; then
 		exec mpv "$URL"
 		ns "spawning video failed\nurl = $URL"
 	fi
@@ -114,32 +134,35 @@ rotator() {
 	# This routine should find appropriate handler for URL.
 	ns "got to rotator with url $URL"
 	case "$URL" in
-		*smotret-anime.ru*) 
+		*smotretanime.ru*)
 			handle_sa_url ;;
-		*play.shikimori.org*) 
+		*play.shikimori.org*)
 			handle_shikimori ;;
-		*cartoonsub.com*) 
+		*cartoonsub.com*)
 			handle_cartoonsub ;;
-		*stormo.tv/embed/*) 
+		*stormo.tv/embed/*)
 			handle_stormo_embed ;;
 		*getfile.dokpub.com*)
 			# handle_dokpub ;;
 			handle_default ;;
-		*) 
+		*sibnet.ru*)
+			handle_sibnet_bad ;;
+			# handle_default ;;
+		*)
 			handle_default ;;
 	esac
 }
 
 chooser() {
-	# When more than one url availible ask user to choose one.
+	# When more than one url availible in TARGETS ask user to choose one.
 	# Updates URL.
-	local nr="${#URLS[@]}"
-	if [ "$nr" -le 1 ] ; then 
-		URL="${URLS[0]}"
+	local nr="${#TARGETS[@]}"
+	if [ "$nr" -le 1 ] ; then
+		URL="${TARGETS[0]}"
 	else
-		URL=$( printf "%s\n" "${URLS[@]}" | rofi -p "mpv.sh" -dmenu )
+		URL=$( printf "%s\n" "${TARGETS[@]}" | rofi -p "mpv.sh" -dmenu )
 	fi
-	URLS=()
+	TARGETS=()
 	[[ "$URL" =~ ^//* ]] && URL="http:$URL"
 }
 
@@ -154,4 +177,6 @@ main() {
 }
 
 main "$@"
+
+exit 0
 
