@@ -35,6 +35,7 @@ ulimit -c unlimited
 
 compton &
 numlockx &
+unclutter --jitter 40 --ignore-scrolling --fork
 
 #systemctl --user start feh-background@5m.timer
 systemctl --user restart feh-background
