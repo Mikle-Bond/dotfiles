@@ -1,0 +1,7 @@
+#!/bin/bash
+
+file=$(mktemp --suffix='.png')
+trap "rm $file" 0 1 2 3 15
+
+qrencode -s 15 -t PNG -o "$file" "$@" && sxiv -s f -z 50 "$file"
+
