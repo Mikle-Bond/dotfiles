@@ -18,12 +18,17 @@ settings:
         ',m': message-info "Spawning MPV" ;; spawn -u mpv.sh "{url}"
         ',o': set-cmd-text -s :open
         ',q': click-element -f id qutebrowser-fakeelem
+        ',r': spawn -u readability
         ',t': set content.proxy system ;; message-info "Set no proxy"
         ',y': open youtube.com
         ;W: hint links run :open -t https://web.archive.org/web/*/{hint-url}
+        ;k: message-info "Share via KDE Connect" ;; hint links spawn kdecli.sh --share
+          {hint-url}
         ;m: message-info "Spawning MPV" ;; hint links spawn mpv {hint-url}
         ;q: hint links userscript qr-url.sh
         ;w: hint links run :open https://web.archive.org/web/*/{hint-url}
+        <: navigate decrement
+        '>': navigate increment
         D: null
         M: null
         X: undo
@@ -40,11 +45,27 @@ settings:
         gw: open https://web.archive.org/web/*/{url}
         j: run-with-count 2 scroll down
         k: run-with-count 2 scroll up
-        ti: spawn -u tor_identity ""
-        tt: config-cycle -p content.proxy socks://localhost:9050/ system ;; reload
+        tbH: config-cycle -p -t -u *://*.{url:host}/* content.host_blocking.enabled
+          ;; reload
+        tbh: config-cycle -p -t -u *://{url:host}/* content.host_blocking.enabled
+          ;; reload
+        tbu: config-cycle -p -t -u {url} content.host_blocking.enabled ;; reload
+        tg: :jseval var s = document.getElementById("qutebrowser-globaltheme").sheet;
+          s.disabled = !s.disabled;
+        tt: spawn -u tor_identity ""
         x: tab-close
-  content.host_blocking.enabled:
+        zi: set content.proxy socks://localhost:4444/ ;; reload
+        zn: set content.proxy system ;; reload
+        zt: set content.proxy socks://localhost:9050/ ;; reload
+        zz: config-cycle -p content.proxy socks://localhost:9050/ system ;; reload
+  colors.downloads.system.bg:
+    global: hsl
+  colors.tabs.indicator.system:
+    global: hsl
+  content.autoplay:
     global: false
+  content.host_blocking.enabled:
+    global: true
   content.host_blocking.lists:
     global:
     - file:///home/mikle/.config/qutebrowser/block.hosts
@@ -68,6 +89,12 @@ settings:
     - -e
     - vim
     - '{}'
+  fonts.tabs:
+    global: 9pt monospace
+  hints.auto_follow_timeout:
+    global: 100
+  hints.chars:
+    global: abcdefghijklmnopqrstuvwxyz
   hints.next_regexes:
     global:
     - \bnext\b
@@ -77,28 +104,55 @@ settings:
     - \b(>>|»)\b
     - \bcontinue\b
     - \bвперёд\b
+    - \bright\b
   hints.prev_regexes:
     global:
-    - \bPrev(ious)?\b
+    - \bprev(ious)?\b
     - \bback\b
     - \bolder\b
     - \b[<←≪]\b
     - \b(<<|«)\b
     - \b<\b
+    - \bназад\b
+    - \bпредыдущий\b
   hints.uppercase:
     global: true
   input.partial_timeout:
     global: 10000
   messages.timeout:
-    global: 5000
+    global: 3000
+  scrolling.smooth:
+    global: true
+  session.lazy_restore:
+    global: true
   tabs.background:
     global: true
+  tabs.favicons.scale:
+    global: 0.8
+  tabs.indicator.padding:
+    global:
+      bottom: 1
+      left: 0
+      right: 2
+      top: 1
+  tabs.indicator.width:
+    global: 2
+  tabs.max_width:
+    global: 400
+  tabs.min_width:
+    global: 100
+  tabs.mousewheel_switching:
+    global: false
   tabs.new_position.unrelated:
     global: next
   tabs.position:
     global: top
   tabs.select_on_remove:
     global: prev
+  tabs.width:
+    global: 20%
+  tabs.wrap:
+    global: false
   url.incdec_segments:
     global:
     - port
