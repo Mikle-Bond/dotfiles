@@ -1,21 +1,27 @@
+! Letter spacing
 *letterSpace: -5
 URxvt*letterSpace: -1
 
+! Fonts {{{
+! Global
 *.font: xft:Droid\ Sans\ Mono:size=10
 
-
+! Rofi
 rofi.font: Droid Sans Mono 12
+! URxvt + vim powerline
 URxvt.font:	\
 	xft:Droid Sans Mono for Powerline Nerd Font:size=10,\
-	xft:Noto Color Emoji:minspace=False,\
 	xft:Unifont:pixelsize=13,\
 	-*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
-
+! st
+st.font: Droid Sans Mono for Powerline Nerd Font:size=10
+st.chscale: 0.9
+st.cwscale: 1.0
+! archived
 ! URxvt*font: xft:Inconsolata for Powerline Nerd Font:size=11
-
-! xft:Noto Color Emoji:minspace=False,\
 ! URxvt*font: xft:Droid Sans Mono for Powerline:pixelsize=13,xft:Symbola,xft:Noto Color Emoji:minspace=False
 ! URxvt*font: xft:Droid\ Sans\ Mono:pixelsize=13,xft:PowerlineSymbols:pixelsize=13
+! }}}
 
 ! Interface
 URxvt*mouseWheelScrollPage: true
