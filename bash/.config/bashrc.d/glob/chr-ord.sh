@@ -8,7 +8,7 @@ function ord() {
 }
 
 chrbin() {
-	echo $(printf \\$(echo "ibase=2; obase=8; $1" | bc))
+	echo $(printf \\$(echo "obase=8; ibase=2; $1" | bc))
 }
 
 ordbin() {
@@ -17,8 +17,10 @@ ordbin() {
 }
 
 ascii2bin() {
-	( set -- "${1:-$(</dev/stdin)}" "${@:2}"
-	echo -n $* ) | while IFS= read -r -n1 char ; do
+	( 
+		set -- "${1:-$(</dev/stdin)}" "${@:2}"
+		echo -n $* 
+	) | while IFS= read -r -n1 char ; do
 		ordbin $char | tr -d '\n'
 		echo -n " "
 	done
@@ -27,10 +29,10 @@ ascii2bin() {
 
 bin2ascii() {
 	( set -- "${1:-$(</dev/stdin)}" "${@:2}"
-	echo -n $* ) | while read -r bin ; do
-		# chrbin $bin | tr -d '\n'
-		echo -n $bin
-	done
+	echo '2i'
+	for bin in $* ; do
+		echo "$bin P"
+	done ) | dc
 	echo
 }
 
