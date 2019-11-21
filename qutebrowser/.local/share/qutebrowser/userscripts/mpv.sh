@@ -27,7 +27,8 @@ function pup_url() {
 
 	dbg "url = $url, selector = $selector"
 
-	wget -qO - "$url" | pup -p "$selector"
+	# wget -qO - "$url" | pup -p "$selector"
+	curl -L "$url"
 }
 
 #==========================================================
@@ -51,6 +52,46 @@ function handle_sa_url() {
 }
 
 handle_shikimori() {
+	if [[ ! "$URL" =~ .*shikimori.org/animes/.* ]] ; then
+		fail "Not used on anime page"
+	fi
+	local num=$(expr "$URL" : '.*animes/\([[:digit:]]*\).*')
+	dbg $num
+	TARGETS=("https://shikimori.online/anime/$num")
+}
+
+handle_shikimori_online() {
+	local frame
+	if [[ "$QUTE_URL" != "$URL" ]] ; then
+		fail "Works only without redirects"
+	fi
+		
+	frame=$(cat "$QUTE_HTML" | pup -p "div.container div.player > iframe attr{src}")
+	dbg "$frame"
+	TARGETS=( "$frame" )
+
+	if false && [[ "$frame" =~ smotretanime\.com  ]] ; then
+		local choise html urls
+		####################################
+		html="$(pup_url "$URL" 'div#authors-sub')"
+		# echo "$html" | pup -p 'div#authors-sub json{}' | jq -r '.[].children | map(.children | { name: .[0].text, src: ( .[1].children | map( select(.text|startswith(smotretanime)|not) ) ) } )'
+		ids=( $(echo "$html" | pup -p 'a:not(:contains("smotretanime")) attr{data-id}' ) ) 
+		choise=( $( echo "$html" `
+			` | pup -p "a json{}" `
+			` | jq -r '.[].children | map ('`
+			            `'.children | .[0].text + '`
+				    `'" -- " + '`
+				    `'(.[1].children[].text)'`
+			         `') | map(select(startswith("smotretanime")|not) )'`
+			` | tee /dev/stderr `
+			` | rofi -dmenu -i -format i
+		) ) || fail "No file chosen"
+		"${ids[$choise]}"
+		TARGETS=(  )
+	fi
+}
+
+handle_play_shikimori() {
 	local url="${URL%/}"
 
 	if [[ "$url" =~ ^.*video_online/[^/]*$ ]] ; then
@@ -136,8 +177,12 @@ rotator() {
 	case "$URL" in
 		*smotretanime.ru*)
 			handle_sa_url ;;
-		*play.shikimori.org*)
+		# *play.shikimori.org*)
+		#         handle_play_shikimori ;;
+		*shikimori.org*|*shikimori.one*)
 			handle_shikimori ;;
+		*shikimori.online*)
+			handle_shikimori_online ;;
 		*cartoonsub.com*)
 			handle_cartoonsub ;;
 		*stormo.tv/embed/*)
@@ -157,8 +202,10 @@ chooser() {
 	# When more than one url availible in TARGETS ask user to choose one.
 	# Updates URL.
 	local nr="${#TARGETS[@]}"
-	if [ "$nr" -le 1 ] ; then
+	if [ "$nr" -eq 1 ] ; then
 		URL="${TARGETS[0]}"
+	elif [ "$nr" -eq 0 ] ; then
+		fail 'Empty target list'
 	else
 		URL=$( printf "%s\n" "${TARGETS[@]}" | rofi -p "mpv.sh" -dmenu )
 	fi

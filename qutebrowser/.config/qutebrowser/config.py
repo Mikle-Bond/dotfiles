@@ -1,7 +1,7 @@
 import yaml 
 
 with (config.configdir / 'colors.yml').open() as f:
-    yaml_data = yaml.load(f)
+    yaml_data = yaml.full_load(f)
 
 def dict_attrs(obj, path=''):
     if isinstance(obj, dict):

@@ -3,11 +3,11 @@
 // @namespace     http://userstyles.org
 // @author        Mikle_Bond
 // @run-at        document-start
-// @version       0.20190316205008
+// @version       0.20190603141314
 // ==/UserScript==
 (function() { var css = "";
-  if(false || (new RegExp("^https?://(?!(forum.example.com|([^/]+\.)?shikimori.org|([^/]+\.)?play.shikimori.org|([^/]+\.)?vk.com|([^/]+\.)?music.yandex.ru|([^/]+\.)?youtube.com|([^/]+\.)?www.youtube.com|([^/]+\.)?nyaa.si|([^/]+\.)?css-tricks.com|([^/]+\.)?codepen.io|([^/]+\.)?store.steampowered.com|([^/]+\.)?userstyles.org|([^/]+\.)?reddit.com|([^/]+\.)?learnrubythehardway.org|([^/]+\.)?googleusercontent.com|([^/]+\.)?pikabu.ru|([^/]+\.)?dotshare.it|([^/]+\.)?web.telegram.org|([^/]+\.)?terminal.sexy)).*$")).test(document.location.href)
- || (document.location.href.indexOf("ftp://") == 0) || (document.location.href.indexOf("file://") == 0) || (document.location.href.indexOf("qute://help") == 0) || (document.location.href.indexOf("chrome://") == 0) || (document.location.href.indexOf("about") == 0) || (document.location.href.indexOf("javascript") == 0) || (document.location.href.indexOf("data:text/html;") == 0))
+  if(false || (new RegExp("^https?://(?!(forum.example.com|([^/]+\.)?shikimori.org|([^/]+\.)?shikimori.one|([^/]+\.)?shikimori.online|([^/]+\.)?play.shikimori.org|([^/]+\.)?vk.com|([^/]+\.)?music.yandex.ru|([^/]+\.)?youtube.com|([^/]+\.)?www.youtube.com|([^/]+\.)?nyaa.si|([^/]+\.)?css-tricks.com|([^/]+\.)?codepen.io|([^/]+\.)?store.steampowered.com|([^/]+\.)?userstyles.org|([^/]+\.)?reddit.com|([^/]+\.)?learnrubythehardway.org|([^/]+\.)?googleusercontent.com|([^/]+\.)?pikabu.ru|([^/]+\.)?dotshare.it|([^/]+\.)?web.telegram.org|([^/]+\.)?terminal.sexy|([^/]+\.)?derpibooru.org)).*$")).test(document.location.href)
+ || (document.location.href.indexOf("ftp://") == 0) || (document.location.href.indexOf("file://") == 0) || (document.location.href.indexOf("qute://") == 0) || (document.location.href.indexOf("chrome://") == 0) || (document.location.href.indexOf("about") == 0) || (document.location.href.indexOf("javascript") == 0) || (document.location.href.indexOf("data:text/html;") == 0))
     css += [ ""
     ,"/* This file originates from Owl plugin for Firefox."
     ," * The original version can be found here: https://github.com/CptFoobar/Owl"

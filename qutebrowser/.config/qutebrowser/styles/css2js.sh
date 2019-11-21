@@ -6,6 +6,8 @@ use args error argparse
 
 EXCLUDE=(
 	"shikimori.org" 
+	"shikimori.one" 
+	"shikimori.online" 
 	"play.shikimori.org"
 	"vk.com" 
 	"music.yandex.ru" 
@@ -24,11 +26,12 @@ EXCLUDE=(
 	"dotshare.it"
 	"web.telegram.org"
 	"terminal.sexy"
+	"derpibooru.org"
 )
 PROTOCOLS=(
 	"ftp://"
 	"file://"
-	"qute://help"
+	"qute://"
 	"chrome://"
 	"about"
 	"javascript"
