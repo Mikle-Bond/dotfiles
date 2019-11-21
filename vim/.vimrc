@@ -92,8 +92,8 @@ set scrolloff=4
 " separate backups
 " NB: both folders has to be created
 set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+set backupdir=~/.vim/backup//
+set directory=~/.vim/tmp//
 
 " This is for working across multiple xterms and/or gvims
 " Transfer/read and write one block of text between vim sessions (capture whole line):
