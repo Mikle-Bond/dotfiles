@@ -74,6 +74,9 @@ Plugin 'amix/vim-zenroom2'
 Plugin 'jceb/vim-orgmode'
 " Plugin ''
 
+Plugin 'sudar/vim-arduino-syntax'
+Plugin 'sudar/vim-arduino-snippets'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -396,6 +399,56 @@ iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 " nnoremap : ;
 
 " set tags=tags;/
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" }}}
+" https://github.com/sloria/dotfiles/blob/master/roles/vim/files/vimrc 
+" {{{
+
+" Remove trailing whitespace with Backspace
+nnoremap <BS> :%s/\s\+$//<cr>:let @/=''<CR>
+" select last pasted text
+nnoremap gp `[v`]
+" Easy syntax switching
+nnoremap <leader>Tp :set ft=python<CR>
+nnoremap <leader>Tj :set ft=javascript<CR>
+nnoremap <leader>Tm :set ft=markdown<CR>
+nnoremap <leader>Ty :set ft=yaml<CR>
+" Quick split
+nnoremap <Leader>v <C-w>v<C-w>w
+" Go to beginning/end of line
+noremap <leader>h ^
+noremap <leader>l $
+" Execute macro
+nnoremap Q @q
+" Split lines (opposite of J)
+nnoremap S i<CR><Esc>
+" nnoremap <leader>N "=strftime("%F")<CR>P
+" inoremap <C-r>n <C-R>=strftime("%F")<CR>
+
+augroup configgroup
+  autocmd!
+  " " Make sure Vim returns to the same line when you reopen a file.
+  " autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute 'normal! g`"zvzz' | endif
+
+  " Automatically adjust quickfix window depending on how much text there is
+  autocmd FileType qf call AdjustWindowHeight(3, 20)
+  function! AdjustWindowHeight(minheight, maxheight)
+    exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+  endfunction
+
+  """ Languages
+  " prose (hard wrap and autoformat paragraphs)
+  autocmd BufRead,BufNewFile jrnl*.txt,editor*.txt set filetype=markdown
+  autocmd BufRead,BufNewFile *.mdx set filetype=markdown
+  autocmd BufRead,BufNewFile *.js.flow set filetype=javascript
+  autocmd BufRead,BufNewFile jrnl*.txt,editor*.txt,*.md,*.rst setlocal nolist wrap linebreak formatoptions+=ntl textwidth=72 wrapmargin=0
+  autocmd BufRead,BufNewFile .eslintrc set filetype=json
+  autocmd BufRead,BufNewFile .babelrc set filetype=json5
+  " commit messages
+  autocmd Filetype gitcommit setlocal nolist textwidth=72
+augroup END
 
 " }}}
 " vim: fdm=marker:
