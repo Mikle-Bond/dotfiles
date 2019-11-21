@@ -11,7 +11,7 @@
 	# feh --bg-fill $name
 # fi
 
-feh_call=(feh --randomize --bg-fill /home/mikle/.config/wallpapers/)
+feh_call=(feh --randomize --bg-max /home/mikle/.config/wallpapers/)
 
 fallback() {
 	"${feh_call[@]}"

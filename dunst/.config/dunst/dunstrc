@@ -293,6 +293,11 @@ appname = "test"
 urgency = normal
 timeout = 0
 
+[kdeconnect]
+appname = "KDE Connect"
+summary = "Pairing *"
+urgency = critical
+timeout = 0
 
 #[espeak]
 #    summary = "*"

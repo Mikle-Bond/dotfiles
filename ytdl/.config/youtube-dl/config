@@ -1,2 +1,1 @@
---netrc
-
+--cookies ~/.local/share/youtube-dl/cookies.txt
