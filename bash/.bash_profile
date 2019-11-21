@@ -15,6 +15,9 @@ PATH="$PATH:/home/mikle/.cargo/bin:$HOME/go/bin"
 # Ruby gems path 
 export GEM_HOME=$HOME/.gem
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+# https://wiki.archlinux.org/index.php/Node.js
+PATH="$HOME/.node_modules/bin:$PATH"
+export npm_config_prefix=~/.node_modules
 
 # git@github.com:medlefsen/std.sh.git
 export STDSH_PATH="$HOME/git-repos/std.sh"
@@ -30,6 +33,12 @@ unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ] ; then
 	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
+
+# FIM requires this font
+export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
+# Activate numpad on tty
+setleds -D +num
 
 # export MPD_HOST="$XDG_CONFIG_HOME/mpd/socket"
 # Seems like idea of socket activation is a bad one...
