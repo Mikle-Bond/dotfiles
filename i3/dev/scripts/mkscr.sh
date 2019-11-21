@@ -5,6 +5,8 @@
 
 # scrot $@ -e 'mv $f /tmp/sc_$f && ln -s /tmp/sc_$f /tmp/sc__last.png'
 
+set -o errexit
+
 # exe='maim'
 exe='flameshot'
 
