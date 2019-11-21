@@ -49,12 +49,14 @@ Plugin 'ervandew/supertab'
 Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-" Plugin 'rafaqz/ranger.vim'
-Plugin 'francoiscabrol/ranger.vim'
 " Plugin 'zhou13/vim-easyescape'
 " Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'pelodelfuego/vim-swoop' " <leader>l
+" ================== Ranger ===================
+" Plugin 'Mizuchi/vim-ranger'
+Plugin 'rafaqz/ranger.vim'
+" Plugin 'francoiscabrol/ranger.vim'
 
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
@@ -245,7 +247,7 @@ set nofoldenable
 " }}}
 " -------------------------- Ranger {{{
 
-" ranger by rafaqz
+" " ranger by rafaqz
 " map <leader>rr :RangerEdit<cr>
 " map <leader>rv :RangerVSplit<cr>
 " map <leader>rs :RangerSplit<cr>
@@ -257,6 +259,12 @@ set nofoldenable
 " ranger by francoiscabol
 let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
+
+" " vim-ranger by Mizuchi
+" let g:ranger_executable = 'ranger'
+" let g:ranger_on_exit = 'bw!'
+" let g:ranger_open_mode = 'tabe'
+" map <leader>f :tabe %:p:h<cr>
 
 " }}}
 " -------------------------- Vimtex {{{
