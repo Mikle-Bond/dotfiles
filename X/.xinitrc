@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd "$HOME"
+
 # Load profile
 for file in "/etc/xprofile" "$HOME/.xprofile"; do
     if [ -f "$file" ]; then
@@ -33,13 +35,16 @@ xsetroot -solid "#1e1e1e"
 
 ulimit -c unlimited
 
-compton &
+# compton &
 numlockx &
-unclutter --jitter 40 --ignore-scrolling --fork
-xinput disable "SynPS/2 Synaptics TouchPad"
+unclutter --jitter 10 --ignore-scrolling --fork
+udiskie -anT2 &
+xinput disable "SynPS/2 Synaptics TouchPad" &
+keynav &
 
 #systemctl --user start feh-background@5m.timer
 systemctl --user restart feh-background
+systemctl --user start kdeconnectd
 
 syndaemon -i 2 -R -K -d -t
 # xset led named "Num Lock"
