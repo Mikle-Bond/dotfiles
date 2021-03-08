@@ -10,7 +10,7 @@ URxvt*letterSpace: -1
 rofi.font: Droid Sans Mono 12
 ! URxvt + vim powerline
 URxvt.font:	\
-	xft:Droid Sans Mono for Powerline Nerd Font:size=10,\
+	xft:Droid Sans Mono for Powerline:size=10,\
 	xft:Unifont:pixelsize=13,\
 	-*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
 ! st

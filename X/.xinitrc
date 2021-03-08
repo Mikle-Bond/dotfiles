@@ -35,16 +35,19 @@ xsetroot -solid "#1e1e1e"
 
 ulimit -c unlimited
 
-# compton &
+picom &
 numlockx &
 unclutter --jitter 10 --ignore-scrolling --fork
 udiskie -anT2 &
 xinput disable "SynPS/2 Synaptics TouchPad" &
-keynav &
+(sleep 10 && keynav ) &
 
-#systemctl --user start feh-background@5m.timer
-systemctl --user restart feh-background
-systemctl --user start kdeconnectd
+(
+	sleep 5
+	systemctl --user start feh-background dunst 
+	sleep 3
+	systemctl --user start kdeconnectd redshift
+) &
 
 syndaemon -i 2 -R -K -d -t
 # xset led named "Num Lock"
