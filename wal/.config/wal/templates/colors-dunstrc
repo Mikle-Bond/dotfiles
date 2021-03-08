@@ -14,7 +14,6 @@
     frame_color = "{color0}"
     background = "{background}"
     foreground = "{color15}"
-    timeout = 3
 
 [urgency_normal]
     frame_color = "{foreground}"

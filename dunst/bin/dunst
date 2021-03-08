@@ -3,6 +3,6 @@
 org_config="$HOME/.config/dunst/dunstrc"
 wal_config="$HOME/.cache/wal/colors-dunstrc"
 
-exec < <( cat "$org_config" "$wal_config" )
+exec < <( /home/mikle/dev/scripts/merge_ini.awk "$org_config" "$wal_config" )
 exec /usr/bin/dunst -config - "$@"
 
