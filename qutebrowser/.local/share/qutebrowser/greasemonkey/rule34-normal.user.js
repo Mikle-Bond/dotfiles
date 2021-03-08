@@ -9,11 +9,12 @@
 (function() {
 
 var css = "";
-if (document.location.href.match("(https?:)?\/\/rule34.xxx\/.*")) 
-	css += [ ""
-		,"iframe[src^=\"https://ads\.\"] { display:none; }"
-	].join("\n");
-	console.log("fuck");
+if (!document.location.href.match("(https?:)?\/\/rule34.xxx\/.*")) 
+	return;
+css += [ ""
+	,"iframe[src^=\"https://ads\.\"] { display:none; }"
+].join("\n");
+console.log("fuck");
 if (typeof GM_addStyle != "undefined") {
 	GM_addStyle(css);
 } else if (typeof PRO_addStyle != "undefined") {

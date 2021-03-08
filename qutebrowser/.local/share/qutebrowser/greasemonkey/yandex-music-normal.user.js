@@ -9,16 +9,17 @@
 (function() {
 
 var css = "";
-if (document.location.href.match("(https?:)?\/\/music.yandex.ru\/.*")) 
-	css += [ ""
-		,"div.bar-below {height:0;}"
-		,"div.centerblock-wrapper {width: 100% !important;}"
-		,"div.multi-auth__plus {background-image: none;}"
-		,"div.d-devider + li.multi-auth__line {height:0;padding-left:100%;overflow-x:hidden;}"
-		,"div.d-overhead-mobile + div:not(.head) {height:0;transform:translateY(-100%);}"
-		,"div.d-overhead-mobile + div:not(.head) img {height:0;background:none !important;}"
-	].join("\n");
-	console.log("fuck");
+if (!document.location.href.match("(https?:)?\/\/music.yandex.ru\/.*")) 
+	return;
+css += [ ""
+	,"div.bar-below {height:0;}"
+	,"div.centerblock-wrapper {width: 100% !important;}"
+	,"div.multi-auth__plus {background-image: none;}"
+	,"div.d-devider + li.multi-auth__line {height:0;padding-left:100%;overflow-x:hidden;}"
+	,"div.d-overhead-mobile + div:not(.head) {height:0;transform:translateY(-100%);}"
+	,"div.d-overhead-mobile + div:not(.head) img {height:0;background:none !important;}"
+].join("\n");
+console.log("fuck");
 if (typeof GM_addStyle != "undefined") {
 	GM_addStyle(css);
 } else if (typeof PRO_addStyle != "undefined") {

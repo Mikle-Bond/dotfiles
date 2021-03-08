@@ -73,6 +73,8 @@ settings:
     global: '#272822'
   colors.tabs.indicator.system:
     global: hsl
+  colors.webpage.prefers_color_scheme_dark:
+    global: true
   completion.cmd_history_max_items:
     global: 50
   completion.delay:
@@ -88,11 +90,16 @@ settings:
     - downloads
   content.autoplay:
     global: false
-  content.host_blocking.enabled:
-    global: true
-  content.host_blocking.lists:
+  content.blocking.enabled:
+    global: false
+  content.blocking.hosts.lists:
     global:
     - file:///home/mikle/.config/qutebrowser/block.hosts
+  content.notifications:
+    global: false
+    https://coub.com: false
+    https://www.pluralsight.com: false
+    https://www.reddit.com: false
   content.proxy:
     global: system
   content.ssl_strict:
@@ -115,10 +122,13 @@ settings:
     - -e
     - vim
     - '{}'
-  fonts.monospace:
-    global: FuraCode Nerd Font
-  fonts.tabs:
-    global: 9pt monospace
+  fonts.default_family:
+    global:
+    - FuraCode Nerd Font
+  fonts.tabs.selected:
+    global: 9pt default_family
+  fonts.tabs.unselected:
+    global: 9pt default_family
   hints.auto_follow_timeout:
     global: 100
   hints.chars:
@@ -174,7 +184,7 @@ settings:
   tabs.new_position.unrelated:
     global: next
   tabs.position:
-    global: top
+    global: left
   tabs.select_on_remove:
     global: prev
   tabs.width:

@@ -118,5 +118,8 @@ colors:
             bg: "{color3}"
     webpage:
         bg: "{foreground}"
+        prefers_color_scheme_dark: true
+        darkmode:
+          enabled: true
 hints:
     border: "1px solid {foreground}"
