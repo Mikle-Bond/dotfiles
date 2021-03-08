@@ -18,7 +18,7 @@ fallback() {
 	exit 0
 }
 
-if pgrep compton &> /dev/null ; then
+if pgrep picom &> /dev/null ; then
 	actwindow=$(xdotool getactivewindow 2> /dev/null )
 	[[ -z $actwindow ]] && fallback
 	(
