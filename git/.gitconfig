@@ -14,5 +14,12 @@
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	co = checkout
+	lga = lg --all --date-order
 [diff]
 	tool = vimdiff
+
+# https://www.reddit.com/r/archlinux/comments/a3ozkz/which_aur_helper_is_currently_the_best_choice/eb7ytsi?utm_source=share&utm_medium=web2x&context=3
+[url "https://aur.archlinux.org/"]
+	insteadOf = "aur:"
+[url "ssh://aur@aur.archlinux.org/"]
+	pushInsteadOf = "aur:"
