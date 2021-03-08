@@ -1,6 +1,7 @@
 {
 	"aururl": "https://aur.archlinux.org",
 	"buildDir": "$HOME/.cache/yay",
+	"absdir": "$HOME/.cache/yay/abs",
 	"editor": "",
 	"editorflags": "",
 	"makepkgbin": "makepkg",
@@ -10,6 +11,7 @@
 	"tarbin": "bsdtar",
 	"redownload": "no",
 	"rebuild": "no",
+	"batchinstall": false,
 	"answerclean": "",
 	"answerdiff": "All",
 	"answeredit": "",
@@ -19,6 +21,7 @@
 	"gpgflags": "",
 	"mflags": "",
 	"sortby": "votes",
+	"searchby": "name-desc",
 	"gitflags": "",
 	"removemake": "no",
 	"requestsplitn": 150,
