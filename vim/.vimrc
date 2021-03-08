@@ -40,10 +40,10 @@ Plugin 'lyokha/vim-xkbswitch'
 " Plugin 'vim-xkbswitch'
 Plugin 'lervag/vimtex'
 
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+" Plugin 'SirVer/ultisnips'
+" Plugin 'honza/vim-snippets'
 
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 
 " ================== Navigation ===================
 Plugin 'christoomey/vim-tmux-navigator'
@@ -55,8 +55,8 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'pelodelfuego/vim-swoop' " <leader>l
 " ================== Ranger ===================
 " Plugin 'Mizuchi/vim-ranger'
-Plugin 'rafaqz/ranger.vim'
-" Plugin 'francoiscabrol/ranger.vim'
+" Plugin 'rafaqz/ranger.vim'
+Plugin 'francoiscabrol/ranger.vim'
 
 " ================== Misc ===================
 " Plugin 'simmel/vim-pastie'
@@ -72,6 +72,8 @@ Plugin 'fidian/hexmode'
 Plugin 'junegunn/goyo.vim'
 Plugin 'amix/vim-zenroom2'
 Plugin 'jceb/vim-orgmode'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 " Plugin ''
 
 Plugin 'sudar/vim-arduino-syntax'
@@ -201,6 +203,10 @@ let g:NERDTrimTrailningWhitespace=1
 
 " }}}
 " -------------------------- YouCompleteMe {{{
+" https://aur.archlinux.org/packages/vim-youcompleteme-git/#pinned-701117
+let g:ycm_use_clangd = 1
+let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+
 let g:ycm_confirm_extra_conf=0
 let g:ycm_global_ycm_extra_conf='/home/mikle/.config/.ycm_extra_conf.py'
 " let g:ycm_key_list_select_completion=['<TAB>']
@@ -208,7 +214,7 @@ let g:ycm_global_ycm_extra_conf='/home/mikle/.config/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_server_python_interpreter='/usr/bin/python3'
-let g:ycm_disable_for_files_larger_than_kb = 30
+let g:ycm_disable_for_files_larger_than_kb = 60
 
 nnoremap <leader>ji :YcmCompleter GoToImprecise<CR>
 nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
@@ -451,4 +457,10 @@ augroup configgroup
 augroup END
 
 " }}}
+
+" Learn Vim the Hard way
+" {{{
+" echom ">^.^<"
+" }}}
+
 " vim: fdm=marker:
