@@ -12,7 +12,7 @@ get_norm_name() {
 show_help() { cat <<EOL
 Package file obtainer dot-get.sh
 USAGE
-	dot-get.sh pkg-name NAME
+	dotget.sh pkg-name NAME
 	
 	pkg-name  -- name of stow package (folder under ~/.dotfiles/)
 	NAME      -- any file under ~/
