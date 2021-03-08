@@ -60,7 +60,7 @@ function generate_output() {
 		radio="${radio%:*}"
 		radio="${radio%/*}"
 		echo -n "$title [$radio]"
-	elif [ -z "$artist" -o -z "$title" ] ; then
+	elif [ -z "$artist" ] || [ -z "$title" ] ; then
 		echo -n "$filename"
 	else
 		echo -n "$artist - $title"
@@ -70,13 +70,15 @@ function generate_output() {
 
 function generate_idle() {
 	while : ; do
-		while [ $(systemctl --user is-active mpd) != "active" ] ; do
+		while [ "$(systemctl --user is-active mpd)" != "active" ] ; do
 			echo "$off_msg"
 			sleep $mpc_delay
 		done
+		# Fixes unresponsive status line after service activation
 		echo "wake up"
 		echo "WAKE UP"
-		mpc idleloop player playlist 2> /dev/null || ( # interesting event types are 'player' and 'playlist'
+		# interesting event types are 'player' and 'playlist'
+		mpc idleloop player playlist 2> /dev/null || (
 			echo "$off_msg"
 			sleep $mpc_delay
 		)
