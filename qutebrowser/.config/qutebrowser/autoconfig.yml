@@ -73,8 +73,10 @@ settings:
     global: '#272822'
   colors.tabs.indicator.system:
     global: hsl
-  colors.webpage.prefers_color_scheme_dark:
-    global: true
+  colors.webpage.bg:
+    global: black
+  colors.webpage.preferred_color_scheme:
+    global: dark
   completion.cmd_history_max_items:
     global: 50
   completion.delay:
@@ -95,15 +97,15 @@ settings:
   content.blocking.hosts.lists:
     global:
     - file:///home/mikle/.config/qutebrowser/block.hosts
-  content.notifications:
+  content.notifications.enabled:
     global: false
     https://coub.com: false
     https://www.pluralsight.com: false
     https://www.reddit.com: false
   content.proxy:
     global: system
-  content.ssl_strict:
-    global: true
+  content.tls.certificate_errors:
+    global: block
   content.user_stylesheets:
     global: null
   content.xss_auditing:
@@ -122,6 +124,8 @@ settings:
     - -e
     - vim
     - '{}'
+  fileselect.handler:
+    global: external
   fonts.default_family:
     global:
     - FuraCode Nerd Font

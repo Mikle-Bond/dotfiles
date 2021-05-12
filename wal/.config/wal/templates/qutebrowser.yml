@@ -117,8 +117,8 @@ colors:
         selected:
             bg: "{color3}"
     webpage:
-        bg: "{foreground}"
-        prefers_color_scheme_dark: true
+        bg: "{background}"
+        preferred_color_scheme: "dark"
         darkmode:
           enabled: true
 hints:
