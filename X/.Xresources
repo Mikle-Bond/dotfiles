@@ -4,7 +4,7 @@ URxvt*letterSpace: -1
 
 ! Fonts {{{
 ! Global
-*.font: xft:Droid\ Sans\ Mono:size=10
+*.font: DroidSansMono Nerd Font Mono:size=10
 
 ! Rofi
 rofi.font: Droid Sans Mono 12
@@ -14,9 +14,12 @@ URxvt.font:	\
 	xft:Unifont:pixelsize=13,\
 	-*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
 ! st
-st.font: Droid Sans Mono for Powerline Nerd Font:size=10
-st.chscale: 0.9
-st.cwscale: 1.0
+! NB: Uppercase specifies the class (appname is omited)
+! So it's equivalent to *.Class.resouce
+St.font: DroidSansMono Nerd Font Mono:pixelsize=14
+!St.chscale: 0.76
+St.cwscale: 1.0
+
 ! archived
 ! URxvt*font: xft:Inconsolata for Powerline Nerd Font:size=11
 ! URxvt*font: xft:Droid Sans Mono for Powerline:pixelsize=13,xft:Symbola,xft:Noto Color Emoji:minspace=False

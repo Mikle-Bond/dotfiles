@@ -12,7 +12,7 @@ case "$1" in
 	htop) 	PROGRAM=(urxvt -name Htop -e htop) ;;
 	log) 	PROGRAM=(urxvt -name "Log screen" -e log_screen.sh) ;;
 	scratch|scratchpad|spad|stash) 
-		PROGRAM=(urxvt -name urxvtq -g 166x21+15+30 -e scratchpad) ;;
+		PROGRAM=(st -n urxvtq -g 166x21+15+30) ;;
 	*)
 		echo "No, you want STASH!"
 		echo "...or LOG, or HTOP..."

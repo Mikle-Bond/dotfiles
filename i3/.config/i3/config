@@ -116,7 +116,7 @@ bindsym $mod+grave scratchpad show
 # External calls
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec st #urxvtc
 
 # start dmenu (uses fuzzy mod)
 bindsym $mod+Shift+d 		exec --no-startup-id "dmenu_run -z"
@@ -284,6 +284,6 @@ exec --no-startup-id start-workspace.sh spad
 exec --no-startup-id start-workspace.sh htop
 exec --no-startup-id start-workspace.sh log
 
-exec urxvtc
+exec st
 
 # vim:ts=8:sw=8
