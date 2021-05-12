@@ -3,3 +3,6 @@
 # TODO: this probably means, it should be done in non-interactive shell as well.
 export GPG_TTY=$(tty)
 
+# This is stated in ArchWiki
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
